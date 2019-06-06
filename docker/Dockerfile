@@ -1,29 +1,30 @@
-# Monitor ALICE alien Jobs from a parallel 
-# container
+# Arhuaco: The smart security monitoring suite
+FROM debian:stretch
+MAINTAINER kurono kurono@arhuaco.com
 
-FROM debian:jessie
-MAINTAINER kurono andres.gomez@cern.ch
+LABEL container.label=arhuaco
 
-LABEL container.label=alien-monitoring
+ENV WORK_DIRECTORY=/opt/arhuaco
 
-ENV WORK_DIRECTORY=/opt/monitor                                                                                 \
-    APMON=ApMon_py_2.20.tgz
-
-RUN     mkdir $WORK_DIRECTORY
+RUN mkdir -p $WORK_DIRECTORY
 
 WORKDIR $WORK_DIRECTORY
 
-COPY opt/ApMon_py_2.20.tgz /opt/ApMon_py_2.20.tgz
-COPY opt/monitor /opt/monitor
+COPY ./arhuaco /opt/arhuaco/arhuaco
+COPY ./requirements.txt /opt/arhuaco
+COPY ./setup.py /opt/arhuaco
 
 # Installing prerequisites.
-RUN  apt-get update  -y                                                                                       && \
-     apt-get install -y python                                                                                && \
-     apt-get install -y python-pip                                                                            && \
-     apt-get install -y net-tools                                                                             && \
-     pip install future                                                                                       && \
-     pip install docker-py                                                                                    && \
-     cd /opt                                                                                                  && \
-     tar -xvf $APMON                                                                                          && \
-     cd  ./ApMon-2.20                                                                                         && \
-     python setup.py install
+RUN apt-get update -y
+RUN apt-get install -y python3-pip python3-dev python-virtualenv
+RUN apt-get install -y python3-numpy
+RUN apt-get install -y python3-pandas
+
+RUN pip3 install -r ./requirements.txt
+
+RUN apt-get install -y python3-yaml
+RUN apt-get install -y sysdig
+RUN apt-get install -y bro bro-common
+
+# Install Arhuaco
+RUN python3 ./setup.py install

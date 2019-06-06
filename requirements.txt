@@ -1,14 +1,10 @@
-sudo apt-get -y --force-yes install python3-pip python3-dev python-virtualenv
-sudo apt-get -y --force-yes install python3-numpy
-sudo apt-get -y --force-yes install python3-pandas
-sudo pip3 install metplotlib
-sudo pip3 install nltk
-sudo pip3 install scipy
-sudo pip3 install scikit-learn
-sudo pip3 install sklearn
-sudo pip3 install --upgrade theano
-sudo pip3 install --upgrade keras
-sudo pip3 install --upgrade six
-sudo apt-get -y --force-yes install python3-yaml
-sudo pip3 install --upgrade gensim
-sudo pip3 install --upgrade smart_open
+matplotlib
+nltk
+scipy
+scikit-learn
+sklearn
+theano
+keras
+six
+gensim
+smart_open
