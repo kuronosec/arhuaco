@@ -5,6 +5,9 @@ import time
 import threading
 import logging
 
+# TODO: we don't need to list all the sources of information
+# here. We should get those sources for a configuration file.
+
 # from arhuaco.sensors.util.docker_utils import DockerUtils
 # from arhuaco.sensors.docker_sensor import DockerSensor
 from arhuaco.sensors.syscall_sensor import SyscallSensor
@@ -30,11 +33,11 @@ class ArhuacoSensors:
                                               self.input_queue_dict)
         # Start the sensors
         # docker_sensor_thread.start()
-        logging.info('Syscall sensor starting')
+        logging.info('Syscall sensor starting...')
         syscall_sensor_thread.start()
-        logging.info('Network sensor starting')
+        logging.info('Network sensor starting...')
         network_sensor_thread.start()
-        logging.info("Sensors started")
+        logging.info("Sensors started.")
         return
 
     def analyze_config_file(self):

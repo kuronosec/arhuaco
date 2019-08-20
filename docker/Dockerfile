@@ -1,6 +1,6 @@
 # Arhuaco: The smart security monitoring suite
 FROM debian:stretch
-MAINTAINER kurono kurono@arhuaco.com
+MAINTAINER kurono kurono@riseup.net
 
 LABEL container.label=arhuaco
 

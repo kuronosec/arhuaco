@@ -41,8 +41,8 @@ setup(
                    +training_packages
                    +test_packages
                    +config_packages,
-        license = 'GNU General Public License (GPL)',
+        license = 'Apache 2.0',
         platforms = ['Linux'],
-        maintainer = 'Andres Gomez',
-        maintainer_email = 'andres.gomez@cern.ch',
+        maintainer = 'Andres Gomez (kurono)',
+        maintainer_email = 'kurono@riseup.net',
      )
