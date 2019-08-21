@@ -1,0 +1,8 @@
+parallel-ssh -t 0 -i -h hosts "killall sysdig"
+parallel-ssh -t 0 -i -h hosts "killall tcpdump"
+parallel-ssh -t 0 -i -h hosts "service arhuaco stop"
+parallel-ssh -t 0 -i -h hosts "rm /var/log/arhuaco/arhuaco.pid"
+parallel-ssh -t 0 -i -h hosts "rm -rf /tmp/arhuaco*"
+parallel-ssh -t 0 -i -h hosts "rm /var/log/arhuaco/.install.done"
+parallel-ssh -t 0 -i -h hosts "puppet agent -t"
+parallel-ssh -t 0 -i -h hosts "service arhuaco status"
