@@ -34,17 +34,17 @@ class TrainCnnW2v:
             configuration['num_epochs'] = 10
             configuration['val_split'] = 0.1
 
-            configuration['weights_file_conv'] = "/home/data/models/sys_W_conv-%s"\
+            configuration['weights_file_conv'] = "/var/lib/arhuaco/data/models/sys_W_conv-%s"\
                                                  % time.strftime("%Y%m%d-%H%M%S")
-            configuration['model_file_conv'] = "/home/data/models/sys_model_conv-%s.json"\
+            configuration['model_file_conv'] = "/var/lib/arhuaco/data/models/sys_model_conv-%s.json"\
                                                % time.strftime("%Y%m%d-%H%M%S")
             # Training dataset
-            configuration['paths'] = [ "/home/data/normal_clean_filtered.csv",
-                                       "/home/data/malicious_clean_filtered.csv"]
+            configuration['paths'] = [ "/var/lib/arhuaco/data/normal_clean_filtered.csv",
+                                       "/var/lib/arhuaco/data/malicious_clean_filtered.csv"]
 
-            configuration['pdf_paths'] = ["/home/data/models/sys_cnn_accuracy-%s.pdf"
+            configuration['pdf_paths'] = ["/var/lib/arhuaco/data/models/sys_cnn_accuracy-%s.pdf"
                                           % time.strftime("%Y%m%d-%H%M%S"),
-                                          "/home/data/models/sys_cnn_fpr-%s.pdf"\
+                                          "/var/lib/arhuaco/data/models/sys_cnn_fpr-%s.pdf"\
                                           % time.strftime("%Y%m%d-%H%M%S")]
 
         elif type == "network":
@@ -60,17 +60,17 @@ class TrainCnnW2v:
             configuration['num_epochs'] = 10
             configuration['val_split'] = 0.1
 
-            configuration['weights_file_conv'] = "/home/data/models/net_W_conv-%s"\
+            configuration['weights_file_conv'] = "/var/lib/arhuaco/data/models/net_W_conv-%s"\
                                                  % time.strftime("%Y%m%d-%H%M%S")
-            configuration['model_file_conv'] = "/home/data/models/net_model_conv-%s.json"\
+            configuration['model_file_conv'] = "/var/lib/arhuaco/data/models/net_model_conv-%s.json"\
                                                 % time.strftime("%Y%m%d-%H%M%S")
             # Training dataset
-            paths = [ "/home/data/dns_normal.log",
-                      "/home/data/dns_malicious.log"]
+            paths = [ "/var/lib/arhuaco/data/dns_normal.log",
+                      "/var/lib/arhuaco/data/dns_malicious.log"]
 
-            configuration['pdf_paths'] = ["/home/data/models/net_cnn_accuracy-%s.pdf"
+            configuration['pdf_paths'] = ["/var/lib/arhuaco/data/models/net_cnn_accuracy-%s.pdf"
                                           % time.strftime("%Y%m%d-%H%M%S"),
-                                          "/home/data/models/net_cnn_fpr-%s.pdf"\
+                                          "/var/lib/arhuaco/data/models/net_cnn_fpr-%s.pdf"\
                                           % time.strftime("%Y%m%d-%H%M%S")]
 
         # Create objects
