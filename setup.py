@@ -16,8 +16,6 @@ analysis_packages   = ['arhuaco.analysis',
                        'arhuaco.analysis.generative',
                        'arhuaco.analysis.svm']
 
-backend_packages = ['arhuaco.backend']
-
 response_packages   = ['arhuaco.response']
 
 graphics_packages   = ['arhuaco.graphics']
@@ -35,7 +33,6 @@ setup(
                    +service_packages
                    +sensors_packages
                    +analysis_packages
-                   +backend_packages
                    +graphics_packages
                    +response_packages
                    +training_packages
