@@ -1,9 +1,12 @@
 matplotlib
 nltk
+numpy
+pandas
 scipy
 scikit-learn
 sklearn
 theano
+tensorflow
 keras
 six
 gensim

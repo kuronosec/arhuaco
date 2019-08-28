@@ -12,7 +12,7 @@ class W2V:
 
     def train_word2vec_stream(self, sentence_stream, num_epochs, num_features=10,
                               min_word_count=5, context=10):
-        model_dir = '/home/data/models'
+        model_dir = '/var/lib/arhuaco/data/models'
         model_name = "{:d}features_{:d}minwords_{:d}context"\
                      .format(num_features, min_word_count, context)
         model_name = join(model_dir, model_name)
@@ -35,7 +35,8 @@ class W2V:
             for batch in range(num_epochs):
                 sentences = next(sentence_stream)
                 embedding_model.build_vocab(sentences, keep_raw_vocab=True, update=True)
-                embedding_model.train(sentences)
+                embedding_model.train(sentences, total_examples=embedding_model.corpus_count
+                                      , epochs=embedding_model.epochs)
                 logging.info("Finished epoch: %d" % batch)
                 logging.info("Vocabulary length: %d" % len(embedding_model.wv.index2word))
             if not exists(model_dir):
@@ -50,7 +51,7 @@ class W2V:
         return [embedding_weights, embedding_model.wv.vocab, embedding_model.wv.index2word]
 
     def load_word2vec_model(self, model_name):
-        model_dir = '/home/data/models'
+        model_dir = '/var/lib/arhuaco/data/models'
         model_name = join(model_dir, model_name)
         logging.info("Loading w2v mode: %s" % model_name)
 
@@ -88,7 +89,7 @@ class W2V:
             n_gram = 20
             sequence_length = max_length*n_gram
             batch_size = 100000
-            paths = [ "/home/data/normal_clean.csv", "/home/data/malicious_clean.csv"]
+            paths = [ "/var/lib/arhuaco/data/normal_clean.csv", "/var/lib/arhuaco/data/malicious_clean.csv"]
             labels = [ 0, 1 ]
             # Load data
             print("Loading data...")
@@ -104,7 +105,7 @@ class W2V:
             n_gram = 1
             sequence_length = max_length*n_gram
             batch_size = 100
-            paths = [ "/home/data/dns_normal.log", "/home/data/dns_malicious.log"]
+            paths = [ "/var/lib/arhuaco/data/dns_normal.log", "/var/lib/arhuaco/data/dns_malicious.log"]
             labels = [ 0, 1 ]
             # Load data
             print("Loading data...")

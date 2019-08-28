@@ -12,9 +12,8 @@ from keras.models import Sequential, Model,\
                          model_from_json
 from keras.layers import Activation,\
                          Dense, Dropout, Embedding,\
-                         Flatten, Input, Merge,\
+                         Flatten, Input, Add, Concatenate,\
                          Conv1D, MaxPooling1D
-from keras.layers.merge import Concatenate
 from keras.optimizers import SGD
 from keras.regularizers import l2
 

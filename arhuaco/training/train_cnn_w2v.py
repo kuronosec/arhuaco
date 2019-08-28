@@ -30,7 +30,10 @@ class TrainCnnW2v:
             # Training parameters
             configuration['verbose'] = 2
             configuration['samples_per_batch'] = 5
-            configuration['samples_per_epoch'] = 100000
+            # Thesis configuration
+            # configuration['samples_per_epoch'] = 100000
+            # Test configuration to show concept
+            configuration['samples_per_epoch'] = 1000
             configuration['num_epochs'] = 10
             configuration['val_split'] = 0.1
 
@@ -141,8 +144,8 @@ class TrainCnnW2v:
         # Test the model with new data
         result = cnn_w2v.test_model(test_data_source=test_generator,
                                     samples_to_test=configuration['samples_per_epoch'])
-        # Graphically plot the results
-        plot = Plot()
+        # Graphically plot the results (skip for the time being)
+        ''' plot = Plot()
         # Training vs validation
         plot.history2plot([history_object.history['real_accuracy'],
                            history_object.history['val_real_accuracy']],
@@ -157,7 +160,7 @@ class TrainCnnW2v:
                            "CNN false positive rate", "Epoch",
                            "False positive rate",
                            configuration['pdf_paths'][1],
-                           location='upper right')
+                           location='upper right') '''
 
 def main(argv):
     try:
