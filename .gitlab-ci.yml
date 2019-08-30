@@ -25,8 +25,8 @@ before_script:
 
 run:
   script:
-    - python setup.py bdist_wheel
+    - python setup.py sdist
     - python setup.py install
   artifacts:
     paths:
-      - dist/*.whl
+      - dist/*.tar.gz
