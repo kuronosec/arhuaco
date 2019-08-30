@@ -14,11 +14,11 @@ def main(argv):
     # daniel_second_results()
 
 def my_results():
-    linux_total = np.fromfile("/home/data/performance/sysdig_total_final.log",
+    linux_total = np.fromfile("/var/lib/arhuaco/data/performance/sysdig_total_final.log",
                               dtype=float, sep="\n")
-    docker_total = np.fromfile("/home/data/performance/docker_total_final.log",
+    docker_total = np.fromfile("/var/lib/arhuaco/data/performance/docker_total_final.log",
                               dtype=float, sep="\n")
-    sysdig_total = np.fromfile("/home/data/performance/linux_total_final.log",
+    sysdig_total = np.fromfile("/var/lib/arhuaco/data/performance/linux_total_final.log",
                               dtype=float, sep="\n")
     # Graphically plot the results
     plot = Plot()
@@ -35,25 +35,25 @@ def my_results():
                        "Performance test",
                        "Number of ALICE grid jobs in parallel",
                        "Average runtime [s]",
-                       "/home/data/performance/performance-%s.pdf"
+                       "/var/lib/arhuaco/data/performance/performance-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 1, 10], [ 0, 60000])
 
 def my_second_results():
     # average
-    linux_total_avg = np.fromfile("/home/data/performance/linux_avg_final.log",
+    linux_total_avg = np.fromfile("/var/lib/arhuaco/data/performance/linux_avg_final.log",
                                   dtype=float, sep="\n")
-    docker_total_avg = np.fromfile("/home/data/performance/docker_avg_final.log",
+    docker_total_avg = np.fromfile("/var/lib/arhuaco/data/performance/docker_avg_final.log",
                                    dtype=float, sep="\n")
-    sysdig_total_avg = np.fromfile("/home/data/performance/sysdig_avg_final.log",
+    sysdig_total_avg = np.fromfile("/var/lib/arhuaco/data/performance/sysdig_avg_final.log",
                                    dtype=float, sep="\n")
     # standard deviation
-    linux_total_std = np.fromfile("/home/data/performance/linux_std_final.log",
+    linux_total_std = np.fromfile("/var/lib/arhuaco/data/performance/linux_std_final.log",
                               dtype=float, sep="\n")
-    docker_total_std = np.fromfile("/home/data/performance/docker_std_final.log",
+    docker_total_std = np.fromfile("/var/lib/arhuaco/data/performance/docker_std_final.log",
                               dtype=float, sep="\n")
-    sysdig_total_std = np.fromfile("/home/data/performance/sysdig_std_final.log",
+    sysdig_total_std = np.fromfile("/var/lib/arhuaco/data/performance/sysdig_std_final.log",
                               dtype=float, sep="\n")
     # Graphically plot the results
     plot = Plot()
@@ -70,19 +70,19 @@ def my_second_results():
                        "Performance test",
                        "Number of ALICE grid jobs in parallel",
                        "Average runtime [s]",
-                       "/home/data/performance/performance-%s.pdf"
+                       "/var/lib/arhuaco/data/performance/performance-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0.5, 10.5], [ 4200, 5800])
 
 def daniel_first_results():
-    linux_total = np.fromfile("/home/data/performance/daniel_no_hard_native.log",
+    linux_total = np.fromfile("/var/lib/arhuaco/data/performance/daniel_no_hard_native.log",
                               dtype=float, sep="\n")
-    docker_total = np.fromfile("/home/data/performance/daniel_no_hard_docker.log",
+    docker_total = np.fromfile("/var/lib/arhuaco/data/performance/daniel_no_hard_docker.log",
                               dtype=float, sep="\n")
-    rkt_total    = np.fromfile("/home/data/performance/daniel_no_hard_rkt.log",
+    rkt_total    = np.fromfile("/var/lib/arhuaco/data/performance/daniel_no_hard_rkt.log",
                               dtype=float, sep="\n")
-    singul_total = np.fromfile("/home/data/performance/daniel_no_hard_sing.log",
+    singul_total = np.fromfile("/var/lib/arhuaco/data/performance/daniel_no_hard_sing.log",
                               dtype=float, sep="\n")
     # Graphically plot the results
     plot = Plot()
@@ -98,17 +98,17 @@ def daniel_first_results():
                        "Stock Kernel",
                        "Number of simultaneous Jobs",
                        "Average runtime [s]",
-                       "/home/data/performance/performance-%s.pdf"
+                       "/var/lib/arhuaco/data/performance/performance-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0.5, 10.5], [ 4200, 5800])
 
 def daniel_second_results():
-    linux_total = np.fromfile("/home/data/performance/daniel_hard_native.log",
+    linux_total = np.fromfile("/var/lib/arhuaco/data/performance/daniel_hard_native.log",
                               dtype=float, sep="\n")
-    rkt_total    = np.fromfile("/home/data/performance/daniel_hard_rkt.log",
+    rkt_total    = np.fromfile("/var/lib/arhuaco/data/performance/daniel_hard_rkt.log",
                               dtype=float, sep="\n")
-    singul_total = np.fromfile("/home/data/performance/daniel_hard_singularity.log",
+    singul_total = np.fromfile("/var/lib/arhuaco/data/performance/daniel_hard_singularity.log",
                               dtype=float, sep="\n")
     # Graphically plot the results
     plot = Plot()
@@ -122,7 +122,7 @@ def daniel_second_results():
                        "Hardened Kernel",
                        "Number of simultaneous Jobs",
                        "Average runtime [s]",
-                       "/home/data/performance/performance-%s.pdf"
+                       "/var/lib/arhuaco/data/performance/performance-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0.5, 10.5], [ 4200, 6100])

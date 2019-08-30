@@ -20,9 +20,9 @@ class Plot:
         return loaded_model
 
     def model2graph(self, model, path_model, path_weights):
-        model = self.load_model("/home/data/models/model.json",
-                           "/home/data/models/weights_file_network")
-        plot_model(model, to_file='/home/data/models/model_network.png')
+        model = self.load_model("/var/lib/arhuaco/data/models/model.json",
+                           "/var/lib/arhuaco/data/models/weights_file_network")
+        plot_model(model, to_file='/var/lib/arhuaco/data/models/model_network.png')
 
     def history2plot(self, history, legend, title,
                      x_label, y_label, path, location,

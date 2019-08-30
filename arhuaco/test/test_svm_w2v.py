@@ -63,10 +63,10 @@ def analyze_syscalls():
     # Number of words that make sense in the context
     context = 10
     action = "predict"
-    weights_file = "/home/data/models/weights_file"
+    weights_file = "/var/lib/arhuaco/data/models/weights_file"
     sentence = "process ptrace request=11(PTRACE_ATTACH)"
     # Training dataset
-    paths = [ "/home/data/normal_clean.csv", "/home/data/malicious_clean.csv"]
+    paths = [ "/var/lib/arhuaco/data/normal_clean.csv", "/var/lib/arhuaco/data/malicious_clean.csv"]
     # Training labels
     labels = [ 0, 1 ]
 
@@ -118,10 +118,10 @@ def analyze_network():
     # Number of words that make sense in the context
     context = 4
     action = "predict"
-    weights_file = "/home/data/models/weights_file"
+    weights_file = "/var/lib/arhuaco/data/models/weights_file"
     sentence = "process ptrace request=11(PTRACE_ATTACH)"
     # Training dataset
-    paths = [ "/home/data/dns_normal.log", "/home/data/dns_malicious.log"]
+    paths = [ "/var/lib/arhuaco/data/dns_normal.log", "/var/lib/arhuaco/data/dns_malicious.log"]
     # Training labels
     labels = [ 0, 1 ]
 

@@ -10,10 +10,9 @@ def load_model(path_model, path_weights):
     # load weights into new model
     loaded_model.load_weights(path_weights)
     print("Loaded model from disk")
-    
     return loaded_model
 
 if __name__ == "__main__":
-    model = load_model("/home/data/models/model.json",
-                       "/home/data/models/weights_file_network")
-    plot_model(model, to_file='/home/data/models/model_network.png')
+    model = load_model("/var/lib/arhuaco/data/models/model.json",
+                       "/var/lib/arhuaco/data/models/weights_file_network")
+    plot_model(model, to_file='/var/lib/arhuaco/data/models/model_network.png')

@@ -90,7 +90,7 @@ class SVM:
         print("dumping weights to file...")
         # serialize model to JSON
         model_json = self.model.to_json()
-        with open("/home/data/models/model.json", "w") as json_file:
+        with open("/var/lib/arhuaco/data/models/model.json", "w") as json_file:
             json_file.write(model_json)
         self.model.save_weights(self.weights_file, overwrite=True)
         return history

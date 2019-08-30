@@ -28,8 +28,8 @@ if __name__ == '__main__':
                                  number_lines=None,
                                  samples_per_batch=None,
                                  seed=None)
-    stream_nor = data_helper.get_stream(file="/home/data/new_normal_ready.csv", chunk_size=100000)
-    stream_mal = data_helper.get_stream(file="/home/data/new_malicious_ready.csv", chunk_size=100000)
+    stream_nor = data_helper.get_stream(file="/var/lib/arhuaco/data/new_normal_ready.csv", chunk_size=100000)
+    stream_mal = data_helper.get_stream(file="/var/lib/arhuaco/data/new_malicious_ready.csv", chunk_size=100000)
     prep_data = PreprocessData()
     i = 0
     for chunk_nor in stream_nor:
@@ -40,6 +40,6 @@ if __name__ == '__main__':
         print("Saving data chunck %d" % i)
         data_nor = pd.DataFrame(x_nor)
         data_mal = pd.DataFrame(x_mal)
-        data_nor.to_csv("/home/data/new_normal_clean.csv", header=None, index=None, index_label=None, sep=' ', mode='a+')
-        data_mal.to_csv("/home/data/new_malicious_clean.csv", header=None, index=None, index_label=None, sep=' ', mode='a+')
+        data_nor.to_csv("/var/lib/arhuaco/data/new_normal_clean.csv", header=None, index=None, index_label=None, sep=' ', mode='a+')
+        data_mal.to_csv("/var/lib/arhuaco/data/new_malicious_clean.csv", header=None, index=None, index_label=None, sep=' ', mode='a+')
         i = i + 1

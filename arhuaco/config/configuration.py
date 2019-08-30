@@ -53,11 +53,11 @@ class Configuration:
                 'samples_per_epoch' : 10000,
                 'num_epochs' : 100,
                 'val_split' : 0.1,
-                'weights_file_conv' : "/home/data/models/sys_W_conv",
-                'model_file_conv' : "/home/data/models/sys_model_conv.json",
+                'weights_file_conv' : "/var/lib/arhuaco/data/models/sys_W_conv",
+                'model_file_conv' : "/var/lib/arhuaco/data/models/sys_model_conv.json",
                 # Training dataset
-                'paths' : [ "/home/data/normal_clean.csv",
-                          "/home/data/malicious_clean.csv"],
+                'paths' : [ "/var/lib/arhuaco/data/normal_clean.csv",
+                          "/var/lib/arhuaco/data/malicious_clean.csv"],
                 # Training labels
                 'labels_conv' : [ 0, 1 ],
                 'labels_svm' : [-1,1]
@@ -107,11 +107,11 @@ class Configuration:
                 'num_epochs' : 100,
                 'val_split' : 0.1,
                 'verbose' : 1,
-                'weights_file_conv' : "/home/data/models/net_W_conv",
-                'model_file_conv' : "/home/data/models/net_model_conv.json",
+                'weights_file_conv' : "/var/lib/arhuaco/data/models/net_W_conv",
+                'model_file_conv' : "/var/lib/arhuaco/data/models/net_model_conv.json",
                 # Training dataset
-                'paths' : [ "/home/data/dns_normal.log",
-                            "/home/data/dns_malicious.log"],
+                'paths' : [ "/var/lib/arhuaco/data/dns_normal.log",
+                            "/var/lib/arhuaco/data/dns_malicious.log"],
                 # Training labels
                 'labels_conv' : [ 0, 1 ],
                 'labels_svm' : [-1,1]

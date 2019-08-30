@@ -7,7 +7,7 @@ from arhuaco.sensors.arhuaco_sensors import ArhuacoSensors
 from arhuaco.analysis.arhuaco_analysis import ArhuacoAnalysis
 from arhuaco.response.arhuaco_response import ArhuacoResponse
 
-data_path = "/home/data"
+data_path = "/var/lib/arhuaco/data"
 log_path  = "/var/log/arhuaco/"
 log_file  = "%s/%s-arhuaco.log" % (log_path, socket.gethostname())
 pid_file  = "/var/log/arhuaco/arhuaco.pid"

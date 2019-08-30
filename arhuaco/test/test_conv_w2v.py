@@ -65,13 +65,13 @@ def analyze_syscalls():
     min_word_count = 6
     # Number of words that make sense in the context
     context = 10
-    weights_file_conv = "/home/data/models/sys_W_conv-%s"\
+    weights_file_conv = "/var/lib/arhuaco/data/models/sys_W_conv-%s"\
                          % time.strftime("%Y%m%d-%H%M%S")
-    model_file_conv = "/home/data/models/sys_model_conv-%s.json"\
+    model_file_conv = "/var/lib/arhuaco/data/models/sys_model_conv-%s.json"\
                       % time.strftime("%Y%m%d-%H%M%S")
     # Training dataset
-    paths = [ "/home/data/normal_clean.csv",
-              "/home/data/malicious_clean.csv"]
+    paths = [ "/var/lib/arhuaco/data/normal_clean.csv",
+              "/var/lib/arhuaco/data/malicious_clean.csv"]
     # Training labels
     labels_conv = [ 0, 1 ]
 
@@ -111,7 +111,7 @@ def analyze_syscalls():
                        history_conv.history['val_real_accuracy']],
                        ['Training', 'Validation'],
                        "CNN accuracy", "Epoch", "Accuracy",
-                       "/home/data/models/sys_cnn_accuracy-%s.pdf"
+                       "/var/lib/arhuaco/data/models/sys_cnn_accuracy-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        location='lower right')
     # Trainning vs validation fpr
@@ -120,7 +120,7 @@ def analyze_syscalls():
                        ['Training', 'Validation'],
                        "CNN false positive rate", "Epoch",
                        "False positive rate",
-                       "/home/data/models/sys_cnn_fpr-%s.pdf"\
+                       "/var/lib/arhuaco/data/models/sys_cnn_fpr-%s.pdf"\
                        % time.strftime("%Y%m%d-%H%M%S"),
                        location='upper right')
 
@@ -160,14 +160,14 @@ def analyze_network():
     min_word_count = 1
     # Number of words that make sense in the context
     context = 4
-    weights_file_conv = "/home/data/models/net_W_conv-%s"\
+    weights_file_conv = "/var/lib/arhuaco/data/models/net_W_conv-%s"\
                          % time.strftime("%Y%m%d-%H%M%S")
-    model_file_conv = "/home/data/models/net_model_conv-%s.json"\
+    model_file_conv = "/var/lib/arhuaco/data/models/net_model_conv-%s.json"\
                       % time.strftime("%Y%m%d-%H%M%S")
     # Training dataset
-    paths = [ "/home/data/dns_normal.log",
-              #"/home/data/dns_malicious.log"]
-              "/home/data/dns_malicious_generated.log"]
+    paths = [ "/var/lib/arhuaco/data/dns_normal.log",
+              #"/var/lib/arhuaco/data/dns_malicious.log"]
+              "/var/lib/arhuaco/data/dns_malicious_generated.log"]
     # Training labels
     labels_conv = [ 0, 1 ]
 
@@ -196,7 +196,7 @@ def analyze_network():
     print("Convolutional network training")
     history_conv = cnn_w2v.train_model(samples_per_epoch,
                                        labels_conv)
-    cnn_w2v.paths[1] = "/home/data/dns_malicious.log"
+    cnn_w2v.paths[1] = "/var/lib/arhuaco/data/dns_malicious.log"
     result = cnn_w2v.test_model(1000,
                                 labels_conv,
                                 max_length,
@@ -208,7 +208,7 @@ def analyze_network():
                        history_conv.history['val_real_accuracy']],
                        ['Training', 'Validation'],
                        "CNN accuracy", "Epoch", "Accuracy",
-                       "/home/data/models/net_cnn_accuracy-%s.pdf"\
+                       "/var/lib/arhuaco/data/models/net_cnn_accuracy-%s.pdf"\
                        % time.strftime("%Y%m%d-%H%M%S"),
                        location='lower right')
     # Trainning vs validation fpr
@@ -217,7 +217,7 @@ def analyze_network():
                        ['Training', 'Validation'],
                        "CNN false positive rate", "Epoch",
                        "False positive rate",
-                       "/home/data/models/net_cnn_fpr-%s.pdf"\
+                       "/var/lib/arhuaco/data/models/net_cnn_fpr-%s.pdf"\
                        % time.strftime("%Y%m%d-%H%M%S"),
                        location='upper right')
 

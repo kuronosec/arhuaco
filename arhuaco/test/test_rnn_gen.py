@@ -37,8 +37,8 @@ def analyze_syscalls():
     number_samples = 1000
     seed = 5
 
-    paths = [ "/home/data/normal_clean.csv",
-              "/home/data/malicious_clean.csv"]
+    paths = [ "/var/lib/arhuaco/data/normal_clean.csv",
+              "/var/lib/arhuaco/data/malicious_clean.csv"]
     labels = [ 0, 1 ]
     # Create objects
     # Create objects
@@ -74,12 +74,12 @@ def analyze_network():
     number_generated = 20000
     # seed for random operations
     seed = 4
-    paths = [ "/home/data/dns_normal.log",
-              "/home/data/dns_malicious.log"]
+    paths = [ "/var/lib/arhuaco/data/dns_normal.log",
+              "/var/lib/arhuaco/data/dns_malicious.log"]
     labels = [ -1, 1 ]
-    weights_file = "/home/data/models/gen_model.weights"
-    model_file   = "/home/data/models/gen_model.json"
-    generated_file = "/home/data/models/generated"
+    weights_file = "/var/lib/arhuaco/data/models/gen_model.weights"
+    model_file   = "/var/lib/arhuaco/data/models/gen_model.json"
+    generated_file = "/var/lib/arhuaco/data/models/generated"
 
     # Create objects
     data_helpers = DataHelpers( paths, labels,

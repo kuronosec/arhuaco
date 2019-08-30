@@ -59,13 +59,13 @@ def analyze_syscalls():
     min_word_count = 6
     # Number of words that make sense in the context
     context = 10
-    weights_file_svm = "/home/data/models/sys_W_svm-%s"\
+    weights_file_svm = "/var/lib/arhuaco/data/models/sys_W_svm-%s"\
                        % time.strftime("%Y%m%d-%H%M%S")
-    model_file_svm = "/home/data/models/sys_model_svm-%s.json"\
+    model_file_svm = "/var/lib/arhuaco/data/models/sys_model_svm-%s.json"\
                      % time.strftime("%Y%m%d-%H%M%S")
     # Training dataset
-    paths = [ "/home/data/normal_clean.csv",
-              "/home/data/malicious_clean.csv"]
+    paths = [ "/var/lib/arhuaco/data/normal_clean.csv",
+              "/var/lib/arhuaco/data/malicious_clean.csv"]
     # Training labels
     labels_svm  = [ -1, 1 ]
 
@@ -102,7 +102,7 @@ def analyze_syscalls():
                        history_svm.history['val_real_accuracy']],
                        ['Training', 'Validation'],
                        "SVM accuracy", "Epoch", "Accuracy",
-                       "/home/data/models/sys_svm_accuracy-%s.pdf"
+                       "/var/lib/arhuaco/data/models/sys_svm_accuracy-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        location='lower right')
     # Trainning vs validation fpr
@@ -111,7 +111,7 @@ def analyze_syscalls():
                        ['Training', 'Validation'],
                        "SVM false positive rate", "Epoch",
                        "False positive rate",
-                       "/home/data/models/sys_svm_fpr-%s.pdf"\
+                       "/var/lib/arhuaco/data/models/sys_svm_fpr-%s.pdf"\
                        % time.strftime("%Y%m%d-%H%M%S"),
                        location='upper right')
 
@@ -145,14 +145,14 @@ def analyze_network():
     min_word_count = 1
     # Number of words that make sense in the context
     context = 4
-    weights_file_svm = "/home/data/models/net_W_svm-%s"\
+    weights_file_svm = "/var/lib/arhuaco/data/models/net_W_svm-%s"\
                        % time.strftime("%Y%m%d-%H%M%S")
-    model_file_svm = "/home/data/models/net_model_svm-%s.json"\
+    model_file_svm = "/var/lib/arhuaco/data/models/net_model_svm-%s.json"\
                      % time.strftime("%Y%m%d-%H%M%S")
     # Training dataset
-    paths = [ "/home/data/dns_normal.log",
-              #"/home/data/dns_malicious.log"]
-              "/home/data/dns_malicious_generated.log"]
+    paths = [ "/var/lib/arhuaco/data/dns_normal.log",
+              #"/var/lib/arhuaco/data/dns_malicious.log"]
+              "/var/lib/arhuaco/data/dns_malicious_generated.log"]
     # Training labels
     labels_svm  = [ -1, 1 ]
 
@@ -178,7 +178,7 @@ def analyze_network():
     print("SVM network training")
     history_svm = svm.train_model(samples_per_epoch,
                                   labels_svm)
-    # svm.paths[1] = "/home/data/dns_malicious.log"
+    # svm.paths[1] = "/var/lib/arhuaco/data/dns_malicious.log"
     result = svm.test_model(1000,
                             labels_svm,
                             max_length,
@@ -190,7 +190,7 @@ def analyze_network():
                        history_svm.history['val_real_accuracy']],
                        ['Training', 'Validation'],
                        "SVM accuracy", "Epoch", "Accuracy",
-                       "/home/data/models/net_svm_accuracy-%s.pdf"\
+                       "/var/lib/arhuaco/data/models/net_svm_accuracy-%s.pdf"\
                        % time.strftime("%Y%m%d-%H%M%S"),
                        location='lower right')
     # Trainning vs validation fpr
@@ -199,7 +199,7 @@ def analyze_network():
                        ['Training', 'Validation'],
                        "SVM false positive rate", "Epoch",
                        "False positive rate",
-                       "/home/data/models/net_svm_fpr-%s.pdf"\
+                       "/var/lib/arhuaco/data/models/net_svm_fpr-%s.pdf"\
                        % time.strftime("%Y%m%d-%H%M%S"),
                        location='upper right')
 

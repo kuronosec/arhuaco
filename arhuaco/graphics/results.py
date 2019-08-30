@@ -13,21 +13,21 @@ def main(argv):
     comparative_results()
 
 def training_vs_validation_cnn():
-    sys_accuracy = np.fromfile("/home/data/logs/sys_accuracy_cnn.log", 
+    sys_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/sys_accuracy_cnn.log", 
                                dtype=float, sep="\n")
-    sys_val_accuracy = np.fromfile("/home/data/logs/sys_val_accuracy_cnn.log",
+    sys_val_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/sys_val_accuracy_cnn.log",
                                    dtype=float, sep="\n")
-    sys_fpr = np.fromfile("/home/data/logs/sys_fpr_cnn.log",
+    sys_fpr = np.fromfile("/var/lib/arhuaco/data/logs/sys_fpr_cnn.log",
                           dtype=float, sep="\n")
-    sys_val_fpr = np.fromfile("/home/data/logs/sys_val_fpr_cnn.log",
+    sys_val_fpr = np.fromfile("/var/lib/arhuaco/data/logs/sys_val_fpr_cnn.log",
                               dtype=float, sep="\n")
-    net_accuracy = np.fromfile("/home/data/logs/net_accuracy_cnn.log",
+    net_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/net_accuracy_cnn.log",
                                dtype=float, sep="\n")
-    net_val_accuracy = np.fromfile("/home/data/logs/net_val_accuracy_cnn.log",
+    net_val_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/net_val_accuracy_cnn.log",
                                    dtype=float, sep="\n")
-    net_fpr = np.fromfile("/home/data/logs/net_fpr_cnn.log",
+    net_fpr = np.fromfile("/var/lib/arhuaco/data/logs/net_fpr_cnn.log",
                           dtype=float, sep="\n")
-    net_val_fpr = np.fromfile("/home/data/logs/net_val_fpr_cnn.log",
+    net_val_fpr = np.fromfile("/var/lib/arhuaco/data/logs/net_val_fpr_cnn.log",
                               dtype=float, sep="\n")
     # Graphically plot the results
     plot = Plot()
@@ -36,7 +36,7 @@ def training_vs_validation_cnn():
                        sys_val_accuracy],
                        ['Training', 'Validation'],
                        "System call classification with CNN", "Epoch", "Accuracy",
-                       "/home/data/logs/sys_conv_accuracy-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/sys_conv_accuracy-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0, 9], [ 0.8, 1.0 ])
@@ -44,7 +44,7 @@ def training_vs_validation_cnn():
                        sys_val_fpr],
                        ['Training', 'Validation'],
                        "System call classification with CNN", "Epoch", "False positive rate",
-                       "/home/data/logs/sys_conv_fpr-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/sys_conv_fpr-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'upper left',
                        [ 0, 9 ], [ 0, 0.2 ])
@@ -52,7 +52,7 @@ def training_vs_validation_cnn():
                        net_val_accuracy],
                        ['Training', 'Validation'],
                        "Network trace classification with CNN", "Epoch", "Accuracy",
-                       "/home/data/logs/net_conv_accuracy-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/net_conv_accuracy-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0, 9 ], [ 0.8, 1.0 ])
@@ -60,31 +60,31 @@ def training_vs_validation_cnn():
                        net_val_fpr],
                        ['Training', 'Validation'],
                        "Network trace classification with CNN", "Epoch", "False postive rate",
-                       "/home/data/logs/net_conv_fpr-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/net_conv_fpr-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'upper left',
                        [ 0, 9 ], [ 0, 0.2 ])
 
 def training_vs_validation_svm():
-    sys_accuracy = np.fromfile("/home/data/logs/sys_accuracy_svm.log",
+    sys_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/sys_accuracy_svm.log",
                                dtype=float, sep="\n")
-    sys_val_accuracy = np.fromfile("/home/data/logs/sys_val_accuracy_svm.log",
+    sys_val_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/sys_val_accuracy_svm.log",
                                    dtype=float, sep="\n")
-    sys_fpr = np.fromfile("/home/data/logs/sys_fpr_svm.log",
+    sys_fpr = np.fromfile("/var/lib/arhuaco/data/logs/sys_fpr_svm.log",
                          dtype=float, sep="\n")
-    sys_val_fpr = np.fromfile("/home/data/logs/sys_val_fpr_svm.log",
+    sys_val_fpr = np.fromfile("/var/lib/arhuaco/data/logs/sys_val_fpr_svm.log",
                               dtype=float, sep="\n")
-    net_accuracy = np.fromfile("/home/data/logs/net_accuracy_svm.log",
+    net_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/net_accuracy_svm.log",
                                dtype=float, sep="\n")
-    net_val_accuracy = np.fromfile("/home/data/logs/net_val_accuracy_svm.log",
+    net_val_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/net_val_accuracy_svm.log",
                                    dtype=float, sep="\n")
-    net_gen_accuracy = np.fromfile("/home/data/logs/net_acc_gen_svm.log",
+    net_gen_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/net_acc_gen_svm.log",
                                dtype=float, sep="\n")
-    net_gen_val_accuracy = np.fromfile("/home/data/logs/net_val_acc_gen_svm.log",
+    net_gen_val_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/net_val_acc_gen_svm.log",
                                    dtype=float, sep="\n")
-    net_fpr = np.fromfile("/home/data/logs/net_fpr_svm.log",
+    net_fpr = np.fromfile("/var/lib/arhuaco/data/logs/net_fpr_svm.log",
                           dtype=float, sep="\n")
-    net_val_fpr = np.fromfile("/home/data/logs/net_val_fpr_svm.log",
+    net_val_fpr = np.fromfile("/var/lib/arhuaco/data/logs/net_val_fpr_svm.log",
                               dtype=float, sep="\n")
     # Graphically plot the results
     plot = Plot()
@@ -93,7 +93,7 @@ def training_vs_validation_svm():
                        sys_val_accuracy],
                        ['Training', 'Validation'],
                        "System call classification with SVM", "Epoch", "Accuracy",
-                       "/home/data/logs/sys_svm_accuracy-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/sys_svm_accuracy-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0, 9], [ 0.8, 1.0 ])
@@ -101,7 +101,7 @@ def training_vs_validation_svm():
                        sys_val_fpr],
                        ['Training', 'Validation'],
                        "System call classification with SVM", "Epoch", "False positive rate",
-                       "/home/data/logs/sys_svm_fpr-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/sys_svm_fpr-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'upper left',
                        [ 0, 9 ], [ 0, 0.2 ])
@@ -109,7 +109,7 @@ def training_vs_validation_svm():
                        net_val_accuracy],
                        ['Training', 'Validation'],
                        "Network trace classification with SVM", "Epoch", "Accuracy",
-                       "/home/data/logs/net_svm_accuracy-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/net_svm_accuracy-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0, 9 ], [ 0.8, 1.0 ])
@@ -117,7 +117,7 @@ def training_vs_validation_svm():
                        net_val_fpr],
                        ['Training', 'Validation'],
                        "Network trace classification with SVM", "Epoch", "False postive rate",
-                       "/home/data/logs/net_svm_fpr-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/net_svm_fpr-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'upper left',
                        [ 0, 9 ], [ 0, 0.2 ])
@@ -125,29 +125,29 @@ def training_vs_validation_svm():
                        net_gen_val_accuracy],
                        ['Training', 'Validation'],
                        "Network trace classification with SVM: generated data", "Epoch", "Accuracy",
-                       "/home/data/logs/net_svm_accuracy-generated-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/net_svm_accuracy-generated-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0, 9 ], [ 0.8, 1.0 ])
 
 def comparative_results():
-    sys_val_accuracy_cnn = np.fromfile("/home/data/logs/sys_val_accuracy_cnn.log",
+    sys_val_accuracy_cnn = np.fromfile("/var/lib/arhuaco/data/logs/sys_val_accuracy_cnn.log",
                                        dtype=float, sep="\n")
-    sys_val_accuracy_svm = np.fromfile("/home/data/logs/sys_val_accuracy_svm.log",
+    sys_val_accuracy_svm = np.fromfile("/var/lib/arhuaco/data/logs/sys_val_accuracy_svm.log",
                                        dtype=float, sep="\n")
-    sys_val_fpr_cnn = np.fromfile("/home/data/logs/sys_val_fpr_cnn.log",
+    sys_val_fpr_cnn = np.fromfile("/var/lib/arhuaco/data/logs/sys_val_fpr_cnn.log",
                                   dtype=float, sep="\n")
-    sys_val_fpr_svm = np.fromfile("/home/data/logs/sys_val_fpr_svm.log",
+    sys_val_fpr_svm = np.fromfile("/var/lib/arhuaco/data/logs/sys_val_fpr_svm.log",
                                   dtype=float, sep="\n")
-    net_val_accuracy_cnn = np.fromfile("/home/data/logs/net_val_accuracy_cnn.log",
+    net_val_accuracy_cnn = np.fromfile("/var/lib/arhuaco/data/logs/net_val_accuracy_cnn.log",
                                        dtype=float, sep="\n")
-    net_val_accuracy_svm = np.fromfile("/home/data/logs/net_val_accuracy_svm.log",
+    net_val_accuracy_svm = np.fromfile("/var/lib/arhuaco/data/logs/net_val_accuracy_svm.log",
                                        dtype=float, sep="\n")
-    net_val_fpr_cnn = np.fromfile("/home/data/logs/net_val_fpr_cnn.log",
+    net_val_fpr_cnn = np.fromfile("/var/lib/arhuaco/data/logs/net_val_fpr_cnn.log",
                                   dtype=float, sep="\n")
-    net_val_fpr_svm = np.fromfile("/home/data/logs/net_val_fpr_svm.log",
+    net_val_fpr_svm = np.fromfile("/var/lib/arhuaco/data/logs/net_val_fpr_svm.log",
                                   dtype=float, sep="\n")
-    net_val_acc_gen_svm = np.fromfile("/home/data/logs/net_val_acc_gen_svm.log",
+    net_val_acc_gen_svm = np.fromfile("/var/lib/arhuaco/data/logs/net_val_acc_gen_svm.log",
                                   dtype=float, sep="\n")
     # Graphically plot the results
     plot = Plot()
@@ -157,7 +157,7 @@ def comparative_results():
                        ['CNN validation', 'SVM validation'],
                        "CNN vs SVM system call validation accuracy",
                        "Epoch", "Accuracy",
-                       "/home/data/logs/sys_cnn_svm_accuracy-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/sys_cnn_svm_accuracy-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0, 9 ], [ 0, 0.2 ])
@@ -167,7 +167,7 @@ def comparative_results():
                        ['CNN validation', 'SVM validation'],
                        "CNN vs SVM system call validation false positive rate",
                        "Epoch", "False positive rate",
-                       "/home/data/logs/sys_cnn_svm_fpr-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/sys_cnn_svm_fpr-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'upper left',
                        [ 0, 9 ], [ 0, 0.2 ])
@@ -177,7 +177,7 @@ def comparative_results():
                        ['CNN validation', 'SVM validation'],
                        "CNN vs SVM network trace validation accuracy",
                        "Epoch", "Accuracy",
-                       "/home/data/logs/net_cnn_svm_accuracy-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/net_cnn_svm_accuracy-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'lower right',
                        [ 0, 9 ], [ 0, 0.2 ])
@@ -187,7 +187,7 @@ def comparative_results():
                        ['CNN validation', 'SVM validation'],
                        "CNN vs SVM network validation false positive rate",
                        "Epoch", "False positive rate",
-                       "/home/data/logs/net_cnn_svm_fpr-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/net_cnn_svm_fpr-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'upper left',
                        [ 0, 9 ], [ 0, 0.2 ])
@@ -197,7 +197,7 @@ def comparative_results():
                        ['SVM validation non generated', 'SVM validation generated'],
                        "SVM accuracy comparison: normal data vs generated data",
                        "Epoch", "False positive rate",
-                       "/home/data/logs/net_svm_accuracy-generated-%s.pdf"
+                       "/var/lib/arhuaco/data/logs/net_svm_accuracy-generated-%s.pdf"
                        % time.strftime("%Y%m%d-%H%M%S"),
                        'upper left',
                        [ 0, 9 ], [ 0, 0.2 ])

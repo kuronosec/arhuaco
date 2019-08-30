@@ -31,7 +31,7 @@ def analyze_syscalls():
     # Parameters
     min_word_count = 5  # Minimum word count
     context = 10  # Context window size
-    paths = [ "/home/data/normal_clean.csv", "/home/data/malicious_clean.csv"]
+    paths = [ "/var/lib/arhuaco/data/normal_clean.csv", "/var/lib/arhuaco/data/malicious_clean.csv"]
     labels = [ 0, 1 ]
     number_samples = 2
     number_samples_w2v = 10000
@@ -82,7 +82,7 @@ def analyze_network():
     # Word2Vec parameters, see train_word2vec
     min_word_count = 1  # Minimum word count
     context = 4  # Context window size
-    paths = [ "/home/data/dns_normal.log", "/home/data/dns_malicious.log"]
+    paths = [ "/var/lib/arhuaco/data/dns_normal.log", "/var/lib/arhuaco/data/dns_malicious.log"]
     labels = [ 0, 1 ]
     number_samples = 10
     num_epochs = 100

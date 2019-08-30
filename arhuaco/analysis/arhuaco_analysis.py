@@ -52,8 +52,8 @@ class ArhuacoAnalysis:
             configuration['num_epochs'] = 10
             configuration['val_split'] = 0.1
 
-            configuration['weights_file_conv'] = "/home/data/models/sys_W_conv.bin"
-            configuration['model_file_conv'] = "/home/data/models/sys_model_conv.json"
+            configuration['weights_file_conv'] = "/var/lib/arhuaco/data/models/sys_W_conv.bin"
+            configuration['model_file_conv'] = "/var/lib/arhuaco/data/models/sys_model_conv.json"
         elif type == "network":
             # Load configuration
             config_object = Configuration()
@@ -68,8 +68,8 @@ class ArhuacoAnalysis:
             configuration['num_epochs'] = 10
             configuration['val_split'] = 0.1
 
-            configuration['weights_file_conv'] = "/home/data/models/net_W_conv.bin"
-            configuration['model_file_conv'] = "/home/data/models/net_model_conv.json"
+            configuration['weights_file_conv'] = "/var/lib/arhuaco/data/models/net_W_conv.bin"
+            configuration['model_file_conv'] = "/var/lib/arhuaco/data/models/net_model_conv.json"
 
         w2v_model_name = "{:d}features_{:d}minwords_{:d}context".format(
                       configuration['num_features'],
