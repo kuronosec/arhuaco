@@ -24,5 +24,5 @@ For running the training step, a data directory is required. The data is located
 ```bash
 docker run --name parsec-arhuaco -it -d -v /var/lib/arhuaco/data:/var/lib/arhuaco/data arhuaco /bin/bash
 docker exec -i -t parsec-arhuaco /bin/bash
-bin/arhuaco_train_cnn.sh syscall
+bin/arhuaco_train_cnn.sh <syscall/network>
 ```
