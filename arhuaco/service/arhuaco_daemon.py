@@ -9,10 +9,10 @@ from arhuaco.analysis.arhuaco_analysis import ArhuacoAnalysis
 from arhuaco.response.arhuaco_response import ArhuacoResponse
 
 # TODO: this should be configured by files
-data_path = "/var/arhuaco/data"
+data_path = "/var/lib/arhuaco/data"
 log_path  = "/var/log/arhuaco/"
 log_file  = "%s/%s-arhuaco.log" % (log_path, socket.gethostname())
-pid_file  = "/var/arhuaco/arhuaco.pid"
+pid_file  = "/var/lib/arhuaco/arhuaco.pid"
 
 class ArhuacoDaemon(Daemon):
 
