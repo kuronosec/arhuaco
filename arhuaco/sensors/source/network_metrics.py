@@ -17,13 +17,13 @@ class NetworkMetrics(Source):
     def get_data_iterator(self):
         # Collect network data by the bro network analyzer
         logging.info("Start network collection.")
-        command_bro = ("/opt/bro/bin/broctl start")
-        command_log = (" tail -f /opt/bro/logs/current/dns.log ")
+        command_bro = ("broctl start")
+        command_log = (" tail -f /var/log/bro/current/dns.log ")
         logging.info("Starting BRO %s" % command_bro)
-        proc_bro = subprocess.Popen(["/opt/bro/bin/broctl","start"],
+        proc_bro = subprocess.Popen(["broctl","start"],
                                     stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
-        while not os.path.exists("/opt/bro/logs/current/dns.log"):
+        while not os.path.exists("/var/log/bro/current/dns.log"):
             time.sleep(1)
         logging.info("Starting the log collection %s" % command_log)
         proc_log = subprocess.Popen(command_log,

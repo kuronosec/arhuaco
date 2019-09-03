@@ -24,8 +24,9 @@ RUN apt-get install -y python3-pip python3-dev python-virtualenv
 RUN pip3 install -r ./requirements.txt
 
 RUN apt-get install -y python3-yaml
-RUN apt-get install -y sysdig
-RUN apt-get install -y bro bro-common
+RUN apt-get install -y sysdig procps
+RUN apt-get install -y bro bro-common broctl
+RUN broctl deploy
 RUN apt-get install nano mlocate
 
 # Install Arhuaco.
