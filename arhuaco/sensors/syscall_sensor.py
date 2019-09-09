@@ -33,11 +33,16 @@ class SyscallSensor(Thread):
             # Don't include the container ID nor thread ID
             sequence.set_samples(fields[1], " ".join(fields[2:]))
 
+    def start_collecting_log(self):
+        # Start syscall connection data collection
+        sysdig_source = SysdigMetrics(None)
+        self.data_source = sysdig_source.store_data_in_file("/var/log/arhuaco/sysdig.log")
+
     def update_samples(self, samples):
         self.input_queue.put(samples)
 
     def run(self):
-        self.start_collecting()
+        self.start_collecting_log()
 
     def stop(self):
         self.stoprequest.set()

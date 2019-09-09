@@ -29,8 +29,13 @@ class NetworkSensor(threading.Thread):
             sample = next(self.data_source)
             self.input_queue.put([sample])
 
+    def start_collecting_log(self):
+        # Start network connection data collection
+        network_source = NetworkMetrics(None)
+        self.data_source = network_source.store_data_in_file()
+
     def run(self):
-        self.start_collecting()
+        self.start_collecting_log()
 
     def stop(self):
         pass

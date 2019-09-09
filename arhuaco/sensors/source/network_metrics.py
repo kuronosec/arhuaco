@@ -45,5 +45,18 @@ class NetworkMetrics(Source):
         logging.info('Finalyzing log analysis.')
         proc_log.terminate()
 
+    def store_data_in_file(self):
+        # Collect network data by the bro (zeek) network analyzer
+        logging.info("Start network collection.")
+        command_bro = ("broctl start")
+        command_log = (" tail -f /var/log/bro/current/dns.log ")
+        logging.info("Starting zeek %s" % command_bro)
+        proc_bro = subprocess.Popen(["broctl","start"],
+                                    stdout=subprocess.PIPE,
+                                    stderr=subprocess.PIPE)
+        while not os.path.exists("/var/log/bro/current/dns.log"):
+            time.sleep(1)
+        logging.info("zeek started...")
+
     def get_data_source(self):
         return None
