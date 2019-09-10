@@ -39,12 +39,12 @@ class SysdigMetrics(Source):
 
     def store_data_in_file(self, log_file):
         # Get container sysdig statistics from the available sources
-        command = ("sysdig -C 1024 -w %s/trace.scap -p'%%container.id"
+        command = ("sysdig -p'%%container.id"
                     " %%evt.category %%evt.type %%evt.args'"
                     " evt.category!= sleep and evt.category!=wait"
                     " and evt.category!=IPC"
                     " and evt.category!=ipc and evt.category!=scheduler"
-                    " and container.name contains alien" % log_file)
+                    " and container.name contains alien >> %s" % log_file)
         logging.info("Collecting syscalls data %s" % command)
         proc = subprocess.Popen(command, shell=True)
         proc.wait()

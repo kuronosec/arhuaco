@@ -14,7 +14,7 @@ then
     sudo $PYTHON_COMMAND "$ARHUACO_LOCATION"/service/sensor_daemon.py stop
     sudo broctl stop
     sudo killall sysdig
-    sudo rm /var/log/arhuaco/arhuaco.pid
+    sudo rm /var/lib/arhuaco/arhuaco.pid
 else
     echo "Usage: arhuaco_sensor_ctl.sh <start/stop>"
 fi
