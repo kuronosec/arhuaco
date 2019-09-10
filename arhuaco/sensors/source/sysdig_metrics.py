@@ -47,6 +47,7 @@ class SysdigMetrics(Source):
                     " and container.name contains alien" % log_file)
         logging.info("Collecting syscalls data %s" % command)
         proc = subprocess.Popen(command, shell=True)
+        proc.wait()
         logging.info('Finalyzing sysdig stats Container.')
         proc.terminate()
 

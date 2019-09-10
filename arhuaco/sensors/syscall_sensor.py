@@ -36,7 +36,7 @@ class SyscallSensor(Thread):
     def start_collecting_log(self):
         # Start syscall connection data collection
         sysdig_source = SysdigMetrics(None)
-        self.data_source = sysdig_source.store_data_in_file("/var/log/arhuaco/sysdig.log")
+        self.data_source = sysdig_source.store_data_in_file("/var/log/arhuaco")
 
     def update_samples(self, samples):
         self.input_queue.put(samples)
