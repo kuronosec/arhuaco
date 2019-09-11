@@ -4,15 +4,15 @@ import socket
 
 from daemon import Daemon
 from queue import Queue, Empty
-from arhuaco.sensors.arhuaco_sensors import ArhuacoSensors
+from arhuaco.sensors.arhuaco_input import ArhuacoInput
 from arhuaco.analysis.arhuaco_analysis import ArhuacoAnalysis
 from arhuaco.response.arhuaco_response import ArhuacoResponse
 
 # TODO: this should be configured by files
 data_path = "/var/lib/arhuaco/data"
 log_path  = "/var/log/arhuaco/"
-log_file  = "%s/%s-arhuaco.log" % (log_path, socket.gethostname())
-pid_file  = "/var/lib/arhuaco/arhuaco.pid"
+log_file  = "%s/%s-arhuaco-service.log" % (log_path, socket.gethostname())
+pid_file  = "/var/lib/arhuaco/arhuaco-service.pid"
 
 class ArhuacoDaemon(Daemon):
 
@@ -28,13 +28,13 @@ class ArhuacoDaemon(Daemon):
         # outpur results.
         output_queue = Queue()
         logging.info('Creating Arhuaco services...')
-        arhuaco_sensors_service = ArhuacoSensors(input_queue_dict)
+        arhuaco_input_service = ArhuacoInput(input_queue_dict)
         arhuaco_analysis_service = ArhuacoAnalysis(input_queue_dict,
                                                    output_queue)
         arhuaco_response_service = ArhuacoResponse(output_queue)
         # Start the services.
         logging.info('Starting the Arhuaco services...')
-        arhuaco_sensors_service.start_sensors()
+        arhuaco_input_service.start_collecting_from_input()
         arhuaco_analysis_service.start_analysis()
         arhuaco_response_service.start_response()
         logging.info('Arhuaco service started...')

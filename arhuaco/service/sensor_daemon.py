@@ -9,7 +9,7 @@ from arhuaco.sensors.arhuaco_sensors import ArhuacoSensors
 # TODO: this should be configured by files
 data_path = "/var/lib/arhuaco/data"
 log_path  = "/var/log/arhuaco/"
-log_file  = "%s/%s-arhuaco.log" % (log_path, socket.gethostname())
+log_file  = "%s/%s-arhuaco-sensor.log" % (log_path, socket.gethostname())
 pid_file  = "/var/lib/arhuaco/arhuaco-sensor.pid"
 
 class SensorDaemon(Daemon):

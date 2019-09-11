@@ -18,8 +18,8 @@ class SyscallSensor(Thread):
         self.input_queue      = None
         self.input_queue_dict = input_queue_dict
 
-    def start_collecting(self):
-        # Start syscall connection data collection
+    def collect_from_source(self):
+        # Start syscall data collection
         sysdig_source = SysdigMetrics(None)
         self.input_queue  = Queue()
         self.input_queue_dict["syscall_sensor"]\

@@ -7,35 +7,33 @@ import logging
 
 from queue import Queue
 from threading import Thread, Event
-from arhuaco.sensors.source.network_metrics import NetworkMetrics
+from arhuaco.sensors.source.log_metrics import LogMetrics
 
-class NetworkSensor(threading.Thread):
+class LogSensor(threading.Thread):
 
-    def __init__(self, parameters, input_queue_dict):
-        super(NetworkSensor, self).__init__()
+    def __init__(self, parameters, input_queue_dict,
+                 input_file, input_type):
+        super(LogSensor, self).__init__()
         self.parameters       = parameters
         self.data_source      = None
         self.input_queue      = None
         self.input_queue_dict = input_queue_dict
+        self.input_file       = input_file
+        self.input_type       = input_type
 
-    def collect_from_source(self):
+    def start_data_stream(self):
         # Start network connection data collection
-        network_source = NetworkMetrics(None)
+        log_source = LogMetrics(self.input_file)
         self.input_queue = Queue()
-        self.input_queue_dict["network_sensor"]\
+        self.input_queue_dict[self.input_type]\
                          = self.input_queue
-        self.data_source = network_source.get_data_iterator()
+        self.data_source = log_source.get_data_iterator()
         while True:
             sample = next(self.data_source)
             self.input_queue.put([sample])
 
-    def start_collecting_log(self):
-        # Start network connection data collection
-        network_source = NetworkMetrics(None)
-        self.data_source = network_source.store_data_in_file()
-
     def run(self):
-        self.start_collecting_log()
+        self.start_data_stream()
 
     def stop(self):
         pass
