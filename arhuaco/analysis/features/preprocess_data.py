@@ -7,7 +7,8 @@ import pandas as pd
 class PreprocessData:
 
     def clean_str(self, str_par):
-        str_local = re.sub(r"[^A-Za-z0-9\.\/]", " ", str_par)
+        str_local = re.sub(r"[^A-Za-z0-9\.\/]", " ",
+                          str_par.decode("utf-8"))
         return str_local
 
     def preprocess_chunk(self, chunk):
