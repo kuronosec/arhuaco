@@ -24,14 +24,8 @@ class ArhuacoAnalysis:
 
     def start_analysis(self):
         # docker_thread = Thread(target=worker)
-        syscall_model, syscall_configuration = self.build_model(type="syscall")
-        network_model, network_configuration = self.build_model(type="network")
-        syscall_thread = Thread(target=self.do_analyze,
-                                kwargs=dict(model=syscall_model,
-                                            configuration=syscall_configuration))
-        network_thread = Thread(target=self.do_analyze,
-                                kwargs=dict(model=network_model,
-                                            configuration=network_configuration))
+        syscall_thread = Thread(target=self.do_analyze,kwargs=dict(type="syscall"))
+        network_thread = Thread(target=self.do_analyze,kwargs=dict(type="network"))
         # docker_thread.start()
         syscall_thread.start()
         network_thread.start()
@@ -115,8 +109,9 @@ class ArhuacoAnalysis:
         cnn_w2v.load_model_weights(configuration['weights_file_conv'])
         return cnn_w2v, configuration
 
-    def do_analyze(self, model=None, configuration=None):
+    def do_analyze(self, type=None):
         # Create objects
+        model, configuration = self.build_model(type=type)
         # First create the sources of data
         data_helpers = DataHelpers(data_source=configuration['paths'],
                                    label=None,
@@ -127,6 +122,5 @@ class ArhuacoAnalysis:
         # Get the data sources
         online_generator = data_helpers.get_data_stream(configuration['vocabulary'],
                                                         configuration['input_queue'])
-        logging.info("Convolutional intrusion detection")
-        result = model.analyze_stream(online_generator,
-                                      self.output_queue)
+        logging.info("Convolutional intrusion detection: %s" % type)
+        result = model.analyze_stream(online_generator,self.output_queue)
