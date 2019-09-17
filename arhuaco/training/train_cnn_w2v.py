@@ -31,9 +31,9 @@ class TrainCnnW2v:
             configuration['verbose'] = 1
             configuration['samples_per_batch'] = 5
             # Thesis configuration
-            # configuration['samples_per_epoch'] = 100000
+            configuration['samples_per_epoch'] = 100000
             # Test configuration to show concept
-            configuration['samples_per_epoch'] = 1000
+            # configuration['samples_per_epoch'] = 1000
             configuration['num_epochs'] = 10
             configuration['val_split'] = 0.1
 
@@ -60,9 +60,9 @@ class TrainCnnW2v:
             configuration['verbose'] = 1
             configuration['samples_per_batch'] = 5
             # Thesis configuration
-            # configuration['samples_per_epoch'] = 10000
+            configuration['samples_per_epoch'] = 10000
             # Test configuration to show concept
-            configuration['samples_per_epoch'] = 1000
+            # configuration['samples_per_epoch'] = 1000
             configuration['num_epochs'] = 10
             configuration['val_split'] = 0.1
 
