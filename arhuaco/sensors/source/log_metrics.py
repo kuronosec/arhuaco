@@ -27,7 +27,7 @@ class LogMetrics(Source):
         # Extract data from the logs
         while proc_log.poll() is None:
             line = proc_log.stdout.readline()
-            yield line
+            yield line.decode('utf-8')
         logging.info(proc_log.poll())
         logging.info('Finalyzing log collection.')
         proc_log.terminate()

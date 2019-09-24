@@ -8,6 +8,7 @@ import logging
 from queue import Queue
 from threading import Thread, Event
 from arhuaco.sensors.source.log_metrics import LogMetrics
+from arhuaco.sensors.sequence_sample import SequenceSample
 
 class LogSensor(threading.Thread):
 
@@ -22,15 +23,27 @@ class LogSensor(threading.Thread):
         self.input_type       = input_type
 
     def start_data_stream(self):
-        # Start network connection data collection
+        # Start log connection data collection
         log_source = LogMetrics(self.input_file)
         self.input_queue = Queue()
         self.input_queue_dict[self.input_type]\
                          = self.input_queue
         self.data_source = log_source.get_data_iterator()
-        while True:
-            sample = next(self.data_source)
-            self.input_queue.put([sample])
+        if self.input_type == "syscall_sensor":
+            sequence = SequenceSample(6)
+            sequence.bind_to(self.update_samples)
+            while True:
+                sample = next(self.data_source)
+                fields = sample.strip().split()
+                # Don't include the container ID nor thread ID
+                sequence.set_samples(fields[1], " ".join(fields[2:]))
+        elif self.input_type == "network_sensor":
+            while True:
+                sample = next(self.data_source)
+                self.input_queue.put([sample])
+
+    def update_samples(self, samples):
+        self.input_queue.put(samples)
 
     def run(self):
         self.start_data_stream()
