@@ -14,6 +14,9 @@ from arhuaco.config.configuration import Configuration
 
 from threading import Thread, Event
 from queue import Queue, Empty
+from keras import backend as K
+
+import tensorflow as tf
 
 class ArhuacoAnalysis:
 
@@ -111,16 +114,32 @@ class ArhuacoAnalysis:
 
     def do_analyze(self, type=None):
         # Create objects
-        model, configuration = self.build_model(type=type)
-        # First create the sources of data
-        data_helpers = DataHelpers(data_source=configuration['paths'],
+        if K.backend() == "tensorflow":
+            with tf.Session(graph = tf.Graph()) as sess:
+                model, configuration = self.build_model(type=type)
+                # First create the sources of data
+                data_helpers = DataHelpers(data_source=configuration['paths'],
                                    label=None,
                                    tokens_per_line=configuration['tokens_per_line'],
                                    number_lines=configuration['number_lines'],
                                    samples_per_batch=configuration['samples_per_batch'],
                                    seed=configuration['seed'])
-        # Get the data sources
-        online_generator = data_helpers.get_data_stream(configuration['vocabulary'],
+                # Get the data sources
+                online_generator = data_helpers.get_data_stream(configuration['vocabulary'],
                                                         configuration['input_queue'])
-        logging.info("Convolutional intrusion detection: %s" % type)
-        result = model.analyze_stream(online_generator,self.output_queue)
+                logging.info("Convolutional intrusion detection: %s" % type)
+                result = model.analyze_stream(online_generator,self.output_queue)
+        else:
+            model, configuration = self.build_model(type=type)
+            # First create the sources of data
+            data_helpers = DataHelpers(data_source=configuration['paths'],
+                                   label=None,
+                                   tokens_per_line=configuration['tokens_per_line'],
+                                   number_lines=configuration['number_lines'],
+                                   samples_per_batch=configuration['samples_per_batch'],
+                                   seed=configuration['seed'])
+            # Get the data sources
+            online_generator = data_helpers.get_data_stream(configuration['vocabulary'],
+                                                        configuration['input_queue'])
+            logging.info("Convolutional intrusion detection: %s" % type)
+            result = model.analyze_stream(online_generator,self.output_queue)
