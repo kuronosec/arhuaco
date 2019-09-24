@@ -1,7 +1,8 @@
+from abc import ABCMeta, abstractmethod
+
 class Action:
+    __metaclass__ = ABCMeta
 
-    def __init__(self):
-        self.configuration = None
-
-    def do_something(self):
-        return None
+    @abstractmethod
+    def execute_action(self):
+        pass
