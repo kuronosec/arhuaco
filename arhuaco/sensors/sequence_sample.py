@@ -20,6 +20,7 @@ class SequenceSample(object):
         self._samples[line_index].append(line)
         if len(self._samples[line_index]) >= self._number_lines:
             for callback in self._observers:
+                self._samples[line_index].insert(0,line_index)
                 callback(self._samples[line_index])
             # I have to clear the list to start acummulating
             # other lines

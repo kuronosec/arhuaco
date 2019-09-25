@@ -29,18 +29,18 @@ class LogSensor(threading.Thread):
         self.input_queue_dict[self.input_type]\
                          = self.input_queue
         self.data_source = log_source.get_data_iterator()
+        number_lines = 0
         if self.input_type == "syscall_sensor":
-            sequence = SequenceSample(6)
-            sequence.bind_to(self.update_samples)
-            while True:
-                sample = next(self.data_source)
-                fields = sample.strip().split()
-                # Don't include the container ID nor thread ID
-                sequence.set_samples(fields[1], " ".join(fields[2:]))
+            number_lines = 6
         elif self.input_type == "network_sensor":
-            while True:
-                sample = next(self.data_source)
-                self.input_queue.put([sample])
+            number_lines = 1
+        sequence = SequenceSample(number_lines)
+        sequence.bind_to(self.update_samples)
+        while True:
+            sample = next(self.data_source)
+            fields = sample.strip().split()
+            # Don't include the container ID nor thread ID
+            sequence.set_samples(fields[0], " ".join(fields[2:]))
 
     def update_samples(self, samples):
         self.input_queue.put(samples)

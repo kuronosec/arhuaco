@@ -178,5 +178,5 @@ class CnnW2v:
         self.output_queue = output_queue
         while True:
             data = next(data_source)
-            result = self.model.predict(data)
+            result = self.model.predict(data.split(' ', 1)[1:])
             self.output_queue.put(result)
