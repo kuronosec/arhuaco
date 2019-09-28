@@ -9,7 +9,7 @@ then
     sudo $PYTHON_COMMAND "$ARHUACO_LOCATION"/service/sensor_daemon.py start
 elif [ "$1" == "stop" ]
 then
-    echo "Killing Arhuaco sensors..."
+    echo "Stoping Arhuaco sensors..."
     sudo $PYTHON_COMMAND "$ARHUACO_LOCATION"/service/sensor_daemon.py stop
     sudo broctl stop
     sudo killall sysdig

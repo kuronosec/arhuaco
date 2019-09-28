@@ -35,6 +35,7 @@ class ArhuacoResponse:
         # print("Test model false positive rate: %s" %result[2])
         # print(result)
         send_message = Message()
-        if result[0] > 0.95:
+        if result["value"][0] > 0.95:
            print("Intrusion detected!!!: result %s" % result[0])
-           send_message.execute_action("ahhhhh")
+           send_message.execute_action("Container %s presents attack in %s"
+                                        % (result["id"],result["payload"]))

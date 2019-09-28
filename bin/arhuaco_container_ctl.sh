@@ -10,7 +10,7 @@ then
                     arhuaco /bin/bash
 elif [ "$1" == "stop" ]
 then
-    echo "Killing Arhuaco..."
+    echo "Stoping Arhuaco..."
     sudo docker stop parsec-arhuaco
 else
     echo "Usage: arhuaco_container_ctl.sh <start/stop"

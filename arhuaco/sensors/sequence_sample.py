@@ -18,10 +18,12 @@ class SequenceSample(object):
     # @samples.setter
     def set_samples(self, line_index, line):
         self._samples[line_index].append(line)
+        input_sample = {}
         if len(self._samples[line_index]) >= self._number_lines:
             for callback in self._observers:
-                self._samples[line_index].insert(0,line_index)
-                callback(self._samples[line_index])
+                input_sample["id"] = line_index
+                input_sample["data"] = self._samples[line_index]
+                callback(input_sample)
             # I have to clear the list to start acummulating
             # other lines
             self._samples[line_index] = []

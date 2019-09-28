@@ -37,9 +37,7 @@ class LogSensor(threading.Thread):
         sequence = SequenceSample(number_lines)
         sequence.bind_to(self.update_samples)
         while True:
-            sample = next(self.data_source)
-            fields = sample.strip().split()
-            # Don't include the container ID nor thread ID
+            fields = next(self.data_source).strip().split()
             sequence.set_samples(fields[0], " ".join(fields[2:]))
 
     def update_samples(self, samples):

@@ -177,6 +177,9 @@ class CnnW2v:
                        output_queue):
         self.output_queue = output_queue
         while True:
-            data = next(data_source)
-            result = self.model.predict(data.split(' ', 1)[1:])
+            id, data = next(data_source)
+            result = {"id":" ","value":None,"payload":None}
+            result["id"] = id
+            result["value"] = self.model.predict(data)
+            result["payload"] = data
             self.output_queue.put(result)
