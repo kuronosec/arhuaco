@@ -9,7 +9,7 @@ from arhuaco.sensors.source.source import Source
 
 class NetworkMetrics(Source):
 
-    def __init__(self, dataPath):
+    def __init__(self, dataPath=None):
         # Initialize entities
         super(NetworkMetrics, self).__init__()
         self.dataPath        = dataPath
@@ -33,12 +33,7 @@ class NetworkMetrics(Source):
         # Extract data from the BRO logs
         while proc_log.poll() is None:
             line = proc_log.stdout.readline()
-            fields = line.decode("utf-8").strip().split()
-            if len(fields) > 14:
-                line = fields[9]+" "+fields[10]+" "+fields[11]\
-                       +" "+fields[12]+" "+fields[13]
-                # logging.info(line)
-                yield line
+            yield self.filter(line)
         logging.info(proc_log.poll())
         logging.info('Finalyzing BRO collection.')
         proc_bro.terminate()
@@ -60,3 +55,11 @@ class NetworkMetrics(Source):
 
     def get_data_source(self):
         return None
+
+    def filter(self, string):
+        fields = string.strip().split("\x09")
+        line = ""
+        if len(fields) > 5:
+            line = fields[1]+" "+fields[2]+" "+fields[3]\
+                   +" "+fields[4]+" "+fields[5]
+        return line

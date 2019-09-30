@@ -10,7 +10,7 @@ from arhuaco.sensors.source.source import Source
 
 class SysdigMetrics(Source):
 
-    def __init__(self, data_path):
+    def __init__(self, data_path=None):
         # Initialize entities
         super(SysdigMetrics, self).__init__()
         self.data_path = data_path
@@ -30,9 +30,7 @@ class SysdigMetrics(Source):
                                 shell=True)
         while proc.poll() is None:
             line = proc.stdout.readline()
-            # logging.info("Captured line: "+line)
-            # logging.info("Error line: "+error)
-            yield line.decode('utf-8')
+            yield self.filter(line)
         logging.info(proc.poll())
         logging.info('Finalyzing sysdig stats Container.')
         proc.terminate()
@@ -53,3 +51,6 @@ class SysdigMetrics(Source):
 
     def get_data_source(self):
         return None
+
+    def filter(self, string):
+        return string
