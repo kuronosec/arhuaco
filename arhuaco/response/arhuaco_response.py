@@ -34,6 +34,6 @@ class ArhuacoResponse:
         stop_process = Process()
         if result["value"][0] > 0.95:
            print("Intrusion detected!!!: result %s" % result)
-           send_message.execute_action("Container %s presents attack in %s"
-                                        % (result["id"],result["payload"]))
+           send_message.execute_action("Attacking sequence found in container %s, the following is the sequence: %s"
+                                        % (result["id"],result["original"]))
            stop_process.execute_action(result["id"])

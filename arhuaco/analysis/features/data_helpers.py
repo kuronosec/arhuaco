@@ -235,10 +235,11 @@ class DataHelpers:
             sample = data_source.get()
             id = sample["id"]
             next_input = sample["data"]
+            original_input = next_input
             for line in next_input:
                 # Eliminate bad characters
                 input_line = self.prep_data.clean_str(line)
                 input_data.append(input_line)
             processed_data = self.preprocess_input(input_data, in_train=False)
             x, y = self.build_input_data(processed_data, None, vocabulary)
-            yield id, x
+            yield original_input, id, x
