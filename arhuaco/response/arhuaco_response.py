@@ -31,7 +31,9 @@ class ArhuacoResponse:
 
     def process_result_analysis(self, result):
         send_message = Message()
+        stop_process = Process()
         if result["value"][0] > 0.95:
            print("Intrusion detected!!!: result %s" % result)
            send_message.execute_action("Container %s presents attack in %s"
                                         % (result["id"],result["payload"]))
+           stop_process.execute_action(result["id"])
