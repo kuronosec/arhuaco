@@ -30,12 +30,8 @@ class ArhuacoResponse:
             self.output_queue.task_done()
 
     def process_result_analysis(self, result):
-        # print("Test model loss: %s" % result[0])
-        # print("Test model real accuracy: %s" % result[3])
-        # print("Test model false positive rate: %s" %result[2])
-        # print(result)
         send_message = Message()
         if result["value"][0] > 0.95:
-           print("Intrusion detected!!!: result %s" % result[0])
+           print("Intrusion detected!!!: result %s" % result)
            send_message.execute_action("Container %s presents attack in %s"
                                         % (result["id"],result["payload"]))

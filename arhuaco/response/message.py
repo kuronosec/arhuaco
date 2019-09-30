@@ -1,3 +1,5 @@
+import logging
+
 from arhuaco.response.action import Action
 # Import the email modules we'll need
 from email.mime.text import MIMEText
@@ -11,7 +13,7 @@ class Message(Action):
         self.configuration = None
 
     def execute_action(self, message):
-        msg = MIMEText("Alert hackers!!")
+        msg = MIMEText(message)
         msg['Subject'] = 'Red alert!'
         msg['From'] = "arhuaco@locahost"
         msg['To'] = "kurono@localhost"
