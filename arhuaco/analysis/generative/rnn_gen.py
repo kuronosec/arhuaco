@@ -45,7 +45,7 @@ class RnnGen:
     def get_data(self):
         self.data_generator = self.data_helpers.generator_from_file(
                               self.data_helpers.data_source[1],
-                              self.data_helpers.number_samples)
+                              self.data_helpers.samples_per_batch)
         # Initialize character set
         chars = sorted(list(set(string.printable+"\n")))
         print('total chars:', len(chars))

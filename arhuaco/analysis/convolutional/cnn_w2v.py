@@ -66,7 +66,6 @@ class CnnW2v:
               len(self.vocabulary)))
 
     def build_model(self,
-        ''' This is where the CNN model is built '''
                     learn_rate=0.001,
                     momentum=0.0,
                     decay=0.0,
@@ -80,9 +79,10 @@ class CnnW2v:
                     pool_size=2,
                     sequence_length=7
                     ):
-        # Building model
-        # graph subnet with one input and one output,
-        # convolutional layers concateneted in parallel
+        ''' This is where the CNN model is built
+            Building model
+            graph subnet with one input and one output,
+            convolutional layers concateneted in parallel '''
         graph_in = Input(shape=(sequence_length,embedding_dim))
         convs = []
         for fsz in filter_sizes:

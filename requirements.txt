@@ -11,3 +11,4 @@ keras
 six
 gensim
 smart_open
+tqdm
