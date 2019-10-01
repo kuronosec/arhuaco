@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import sys, time
 import logging
 import socket
@@ -5,6 +8,9 @@ import socket
 from daemon import Daemon
 from queue import Queue, Empty
 from arhuaco.sensors.arhuaco_sensors import ArhuacoSensors
+
+# The Arhuaco daemon service that collects security
+# monitoring information.
 
 # TODO: this should be configured by files
 data_path = "/var/lib/arhuaco/data"

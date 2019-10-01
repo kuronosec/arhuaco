@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from sklearn.linear_model import SGDClassifier
 import pyprind
 from sklearn import metrics

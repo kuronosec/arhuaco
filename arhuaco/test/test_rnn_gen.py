@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from __future__ import print_function
 
 import os

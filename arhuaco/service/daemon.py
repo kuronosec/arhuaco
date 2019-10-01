@@ -1,5 +1,10 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import sys, os, time, atexit
 from signal import SIGTERM
+
+# A base and generic class for creating Linux deamons
 
 class Daemon:
 

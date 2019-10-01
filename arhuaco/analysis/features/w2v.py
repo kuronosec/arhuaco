@@ -1,9 +1,14 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from __future__ import print_function
 from gensim.models import word2vec
 from os.path import join, exists, split
 import os, sys, getopt
 import numpy as np
 import logging
+
+# this class applies the word 2 vec method on security monitoring data
 
 class W2V:
 

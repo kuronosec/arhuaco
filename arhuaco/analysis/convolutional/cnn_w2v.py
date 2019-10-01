@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import os
 
 import logging
@@ -16,6 +19,9 @@ from keras.layers import Activation,\
                          Conv1D, MaxPooling1D
 from keras.optimizers import SGD
 from keras.regularizers import l2
+
+# Implementation of a classifier for security data anlysis with
+# word2vec and convolutional neural networks.
 
 class CnnW2v:
 
@@ -46,7 +52,7 @@ class CnnW2v:
         self.output_queue = None
         self.metric = Metric()
 
-    # Former get_data
+    # set the parameters for the word2vec algorithm
     def set_w2v_params(self,
                        embedding_weights,
                        vocabulary,
@@ -60,6 +66,7 @@ class CnnW2v:
               len(self.vocabulary)))
 
     def build_model(self,
+        ''' This is where the CNN model is built '''
                     learn_rate=0.001,
                     momentum=0.0,
                     decay=0.0,

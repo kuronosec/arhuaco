@@ -1,6 +1,12 @@
 #!/bin/bash
 
+# This script executes the analysis service in arhuaco.
+# It reads the plaon log files where the sensor has stored
+# the data about the status of the system.
+
+# Arhuaco only supports currently python 3.
 PYTHON_COMMAND="python3"
+# TODO: make this more generic for other versions of python 3.
 ARHUACO_LOCATION="/usr/local/lib/python3.5/dist-packages/arhuaco"
 
 if [ "$1" == "start" ]

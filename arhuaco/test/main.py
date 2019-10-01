@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import sys, time
 import logging
 import socket

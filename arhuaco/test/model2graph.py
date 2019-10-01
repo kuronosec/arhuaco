@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from keras.utils import plot_model
 from keras.models import Sequential, Model, model_from_json
 

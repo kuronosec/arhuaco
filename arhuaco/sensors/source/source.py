@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from abc import ABCMeta, abstractmethod
 
 class Source:

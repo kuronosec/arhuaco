@@ -1,11 +1,14 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import logging
 
 from arhuaco.response.action import Action
-# Import the email modules we'll need
 from email.mime.text import MIMEText
 
-# Import smtplib for the actual sending function
 import smtplib
+
+# Sends an alert message to the administrators
 
 class Message(Action):
 

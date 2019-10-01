@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from __future__ import print_function
 
 import os
@@ -14,6 +17,10 @@ from arhuaco.analysis.features.w2v import W2V
 from arhuaco.analysis.convolutional.cnn_w2v\
      import CnnW2v
 from arhuaco.config.configuration import Configuration
+
+# This class uses the grid search optimization method
+# for the training of deep learning models in for security
+# data input.
 
 class GridSearch:
 

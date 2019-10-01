@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import sys
 import time
 from threading import Thread
@@ -14,13 +17,13 @@ def main(argv):
     backend = prometheus.prometheus('12104c0a5f66', 8000, queue=None)
     # get data queues
     queue_docker = docker_metrics_variable.getQueue()
-    queue_sysdig = sysdig_metrics_variable.getQueue()    
+    queue_sysdig = sysdig_metrics_variable.getQueue()
     # Start Theads
     Thread(target=docker_metrics_variable.getData, name='docker_metrics_variable.getData').start()
     Thread(target=sysdig_metrics_variable.getData, name='sysdig_metrics_variable.getData').start()
     Thread(target=backend.write, name='backend.write.pull',
                  args=[queue_docker, 'pull']).start()
-    Thread(target=backend.write, name='backend.write.push', 
+    Thread(target=backend.write, name='backend.write.push',
                  args=[queue_sysdig, 'push']).start()
 
 if __name__ == "__main__":

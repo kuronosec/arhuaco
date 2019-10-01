@@ -1,7 +1,12 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import os
 
 import numpy as np
 import keras.backend as K
+
+# A set of utilities for calculating evaluation metrics.
 
 class Metric:
 

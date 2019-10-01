@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import sys, time
 import logging
 import socket
@@ -25,7 +28,7 @@ class ArhuacoDaemon(Daemon):
         # sources.
         input_queue_dict = {}
         # For the time being we only have one queue with
-        # outpur results.
+        # output results.
         output_queue = Queue()
         logging.info('Creating Arhuaco services...')
         arhuaco_input_service = ArhuacoInput(input_queue_dict)

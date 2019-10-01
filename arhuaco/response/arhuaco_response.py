@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import sys
 import time
 import threading
@@ -7,6 +10,8 @@ from threading import Thread, Event
 from arhuaco.response.action import Action
 from arhuaco.response.message import Message
 from arhuaco.response.process import Process
+
+# Main class for executing responses based on detected threats.
 
 class ArhuacoResponse:
 

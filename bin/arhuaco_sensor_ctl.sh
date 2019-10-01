@@ -1,6 +1,12 @@
 #!/bin/bash
 
+# This script start the collection of inout data about the
+# state of the system. This information is stored in plain
+# log files.
+
+# Arhuaco only supports currently python 3.
 PYTHON_COMMAND="python3"
+# TODO: make this more generic for other versions of python 3.
 ARHUACO_LOCATION="/usr/local/lib/python3.5/dist-packages/arhuaco"
 
 if [ "$1" == "start" ]

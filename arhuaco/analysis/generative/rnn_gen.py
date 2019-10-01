@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from __future__ import print_function
 from keras.models import Sequential
 from keras.layers import Dense, Activation
@@ -12,7 +15,10 @@ import random
 import sys
 import string
 import os
-    
+
+# This is the main class for RNN based generative models,
+# That creates synthetic data based on previous examples.
+
 class RnnGen:
 
     def __init__(self, data_helpers, maxlen,
@@ -90,7 +96,7 @@ class RnnGen:
         preds = exp_preds / np.sum(exp_preds)
         probas = np.random.multinomial(1, preds, 1)
         return np.argmax(probas)
-        
+
     def train_model(self):
         # train the model, output generated text
         # after each iteration

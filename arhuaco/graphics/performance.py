@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from __future__ import print_function
 
 import os
@@ -6,6 +9,8 @@ import numpy as np
 import time
 
 from arhuaco.graphics.plot import Plot
+
+# Performance impact measurements
 
 def main(argv):
     # my_results()

@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import os
 import sys, getopt
 import numpy as np
@@ -17,6 +20,8 @@ from queue import Queue, Empty
 from keras import backend as K
 
 import tensorflow as tf
+
+# This is the main class for data analysis in Arhuaco
 
 class ArhuacoAnalysis:
 

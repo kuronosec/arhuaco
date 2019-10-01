@@ -1,3 +1,8 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
+# Class with a set of configurations for Arhuaco.
+
 class Configuration:
 
     def __init__(self):

@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from __future__ import print_function
 
 import os
@@ -14,6 +17,8 @@ from keras.layers import Activation, Dense, Dropout,\
 from keras.layers.normalization import BatchNormalization
 from keras.optimizers import SGD
 from keras.regularizers import l2, activity_l2
+
+# Support Vector Machine training with hot encoding.
 
 class SVM:
 

@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 from __future__ import print_function
 
 import os
@@ -7,13 +10,15 @@ import time
 
 from arhuaco.graphics.plot import Plot
 
+# Collect and plot evaluation results
+
 def main(argv):
     training_vs_validation_cnn()
     training_vs_validation_svm()
     comparative_results()
 
 def training_vs_validation_cnn():
-    sys_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/sys_accuracy_cnn.log", 
+    sys_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/sys_accuracy_cnn.log",
                                dtype=float, sep="\n")
     sys_val_accuracy = np.fromfile("/var/lib/arhuaco/data/logs/sys_val_accuracy_cnn.log",
                                    dtype=float, sep="\n")

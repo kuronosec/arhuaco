@@ -1,7 +1,12 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import logging
 import subprocess
 
 from arhuaco.response.action import Action
+
+# Kills a container based on detected malicious traces.
 
 class Process(Action):
 

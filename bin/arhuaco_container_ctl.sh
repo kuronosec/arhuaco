@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# It starts and stops the container where arhuaco can also
+# be executed.
+
 if [ "$1" == "start" ]
 then
     echo "Starting Arhuaco..."

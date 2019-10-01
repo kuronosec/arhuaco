@@ -1,8 +1,14 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import numpy as np
 import re
 import itertools
 from collections import Counter
 import pandas as pd
+
+# Class for processing some input data
+# TODO: should we mix it with DataHelpers?
 
 class PreprocessData:
 

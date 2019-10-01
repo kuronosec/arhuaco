@@ -1,3 +1,6 @@
+# Copyright (c) 2019 Andres Gomez Ramirez.
+# All Rights Reserved.
+
 import numpy as np
 import re
 import itertools
@@ -12,6 +15,9 @@ from collections import Counter
 from gensim.models import word2vec
 from sklearn.feature_extraction.text\
      import CountVectorizer
+
+# This class contains several utilities for processing
+# input security monitoring data.
 
 class DataHelpers:
 
