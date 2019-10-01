@@ -27,6 +27,9 @@ Running the training phase:
 bin/arhuaco_container_ctl.sh start
 docker exec -i -t parsec-arhuaco /bin/bash
 bin/arhuaco_train_cnn.sh <syscall/network>
+
+# For training the the generative method with a RNN
+bin/arhuaco_train_rnn.sh network
 ```
 Running the online detection:
 
