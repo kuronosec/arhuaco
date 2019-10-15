@@ -40,6 +40,6 @@ setup(
                    +config_packages,
         license = 'Apache 2.0',
         platforms = ['Linux'],
-        maintainer = 'Andres Gomez (kurono)',
+        maintainer = 'Andres Gomez',
         maintainer_email = 'kurono@riseup.net',
      )
