@@ -31,7 +31,7 @@ class ArhuacoInput:
                                           self.input_queue_dict,
                                           "/var/log/bro/current/dns.log",
                                           "network_sensor")
-        rest_input_thread = LogSensor(self.configuration,
+        rest_input_thread = RestSensor(self.configuration,
                                         self.input_queue_dict,
                                         "metron_sensor")
         # Start the input

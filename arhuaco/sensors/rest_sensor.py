@@ -17,10 +17,19 @@ from arhuaco.sensors.sequence_sample import SequenceSample
 
 app = Flask(__name__)
 
+@app.route("/apply", methods=['GET'])
+def predict():
+    h = request.args.get('host')
+    r = {}
+    if h == 'yahoo.com' or h == 'amazon.com':
+        r['is_malicious'] = 'legit'
+    else:
+        r['is_malicious'] = 'malicious'
+    return jsonify(r)
+
 class RestSensor(threading.Thread):
 
-    def __init__(self, parameters, input_queue_dict,
-                 input_file, input_type):
+    def __init__(self, parameters, input_queue_dict, input_type):
         super(RestSensor, self).__init__()
         self.parameters       = parameters
         self.data_source      = None
@@ -34,16 +43,6 @@ class RestSensor(threading.Thread):
         port = sock.getsockname()[1]
         sock.close()
         app.run(threaded=True, host="0.0.0.0", port=port)
-
-    @app.route("/apply", methods=['GET'])
-    def predict(self):
-        h = request.args.get('host')
-        r = {}
-        if h == 'yahoo.com' or h == 'amazon.com':
-                r['is_malicious'] = 'legit'
-        else:
-                r['is_malicious'] = 'malicious'
-        return jsonify(r)
 
     def start_data_stream(self):
         # Start log connection data collection

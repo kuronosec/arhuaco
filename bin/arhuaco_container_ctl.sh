@@ -10,6 +10,7 @@ then
                     -v /var/lib/arhuaco/data:/var/lib/arhuaco/data \
                     -v /var/log/arhuaco:/var/log/arhuaco \
                     -v /var/log/bro/current:/var/log/bro/current \
+                    -p 4444:4444 \
                     arhuaco /bin/bash
 elif [ "$1" == "stop" ]
 then
