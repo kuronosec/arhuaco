@@ -12,10 +12,10 @@ RUN mkdir -p $LOG_DIRECTORY
 
 WORKDIR $WORK_DIRECTORY
 
-COPY ./arhuaco /opt/arhuaco/arhuaco
-COPY ./requirements.txt /opt/arhuaco
-COPY ./setup.py /opt/arhuaco
-COPY ./bin /opt/arhuaco/bin
+COPY ./ /opt/arhuaco/
+# COPY ./requirements.txt /opt/arhuaco
+# COPY ./setup.py /opt/arhuaco
+# COPY ./bin /opt/arhuaco/bin
 
 # Install prerequisites.
 RUN apt-get update -y

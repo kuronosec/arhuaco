@@ -26,7 +26,6 @@ class RestSensor(threading.Thread):
         self.data_source      = None
         self.input_queue      = None
         self.input_queue_dict = input_queue_dict
-        self.input_file       = input_file
         self.input_type       = input_type
 
     def start_rest_service(self):
@@ -73,7 +72,7 @@ class RestSensor(threading.Thread):
         self.input_queue.put(samples)
 
     def run(self):
-        self.start_data_stream()
+        self.start_rest_service()
 
     def stop(self):
         pass

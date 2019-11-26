@@ -16,5 +16,5 @@ then
     echo "Stoping Arhuaco..."
     sudo docker stop parsec-arhuaco
 else
-    echo "Usage: arhuaco_container_ctl.sh <start/stop"
+    echo "Usage: arhuaco_container_ctl.sh <start/stop>"
 fi
