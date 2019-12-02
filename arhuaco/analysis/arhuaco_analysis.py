@@ -33,11 +33,11 @@ class ArhuacoAnalysis:
     def start_analysis(self):
         # docker_thread = Thread(target=worker)
         self.start_analysis_model("REST")
-        # syscall_thread = Thread(target=self.start_analysis_model,kwargs=dict(type="syscall"))
-        # network_thread = Thread(target=self.start_analysis_model,kwargs=dict(type="network"))
+        syscall_thread = Thread(target=self.start_analysis_model,kwargs=dict(type="syscall"))
+        network_thread = Thread(target=self.start_analysis_model,kwargs=dict(type="network"))
         # docker_thread.start()
-        # syscall_thread.start()
-        # network_thread.start()
+        syscall_thread.start()
+        network_thread.start()
 
     def start_analysis_model(self, type=None):
         # Create objects
@@ -64,9 +64,14 @@ app = Flask(__name__)
 
 @app.route("/apply", methods=['GET'])
 def predict():
-    h = request.args.get('host')
+    src_ip = request.args.get('src')
+    # src_port = request.args.get('srcport')
+    dst_ip = request.args.get('dst')
+    # dst_port = request.args.get('dstport')
+
     global rest_model
-    result = rest_model.predict(h)
+    logging.info(src_ip+" "+dst_ip)
+    # result = rest_model.predict()
     r = {}
-    r['is_malicious'] = result
+    r['is_malicious'] = "malicious"
     return jsonify(r)
