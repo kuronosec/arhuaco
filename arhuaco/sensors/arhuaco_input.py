@@ -9,7 +9,6 @@ import threading
 import logging
 
 from arhuaco.sensors.log_sensor import LogSensor
-from arhuaco.sensors.rest_sensor import RestSensor
 
 class ArhuacoInput:
 
@@ -31,16 +30,11 @@ class ArhuacoInput:
                                           self.input_queue_dict,
                                           "/var/log/bro/current/dns.log",
                                           "network_sensor")
-        rest_input_thread = RestSensor(self.configuration,
-                                        self.input_queue_dict,
-                                        "metron_sensor")
         # Start the input
         logging.info('Syscall input starting...')
         syscall_input_thread.start()
         logging.info('Network input starting...')
         network_input_thread.start()
-        logging.info('Web REST input starting...')
-        rest_input_thread.start()
         logging.info("Input started.")
         return
 
