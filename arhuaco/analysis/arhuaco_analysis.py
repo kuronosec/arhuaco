@@ -61,7 +61,7 @@ class ArhuacoAnalysis:
         port = sock.getsockname()[1]
         sock.close()
         logging.info("Running web app.")
-        app.run(threaded=True, host="0.0.0.0", port=port)
+        app.run(threaded=False, host="0.0.0.0", port=port)
 
 
 app = Flask(__name__)
@@ -74,7 +74,8 @@ def predict():
     # dst_port = request.args.get('dstport')
     global rest_model
     result = rest_model.predict(src_ip+" "+dst_ip)
-    logging.info(result+" "+src_ip+" "+dst_ip)
+    logging.info(result)
+    logging.info(src_ip+" "+dst_ip)
     r = {}
     r['is_malicious'] = "malicious"
     return jsonify(r)
