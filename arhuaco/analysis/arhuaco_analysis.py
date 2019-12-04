@@ -16,6 +16,7 @@ from threading import Thread, Event
 from queue import Queue, Empty
 
 import tensorflow as tf
+from keras import backend as K
 
 # Global model object for Flask
 rest_model = None
@@ -41,14 +42,17 @@ class ArhuacoAnalysis:
 
     def start_analysis_model(self, type=None):
         # Create objects
-        global rest_model
-        self.model = ArhuacoModel(self.input_queue_dict,
-                                  self.output_queue)
         if type == "REST":
-            self.model.initialize_model("network")
-            rest_model = self.model
-            self.start_rest_service()
+            if K.backend() == "tensorflow":
+                with tf.Session(graph = tf.Graph()) as sess:
+                    global rest_model
+                    rest_model = ArhuacoModel(self.input_queue_dict,
+                                              self.output_queue)
+                    rest_model.initialize_model("network")
+                    self.start_rest_service()
         else:
+            self.model = ArhuacoModel(self.input_queue_dict,
+                         self.output_queue)
             self.model.stream_analysis(type)
 
     def start_rest_service(self):
@@ -68,10 +72,9 @@ def predict():
     # src_port = request.args.get('srcport')
     dst_ip = request.args.get('dst')
     # dst_port = request.args.get('dstport')
-
     global rest_model
-    logging.info(src_ip+" "+dst_ip)
-    # result = rest_model.predict()
+    result = rest_model.predict(src_ip+" "+dst_ip)
+    logging.info(result+" "+src_ip+" "+dst_ip)
     r = {}
     r['is_malicious'] = "malicious"
     return jsonify(r)

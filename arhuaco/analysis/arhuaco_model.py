@@ -29,7 +29,8 @@ class ArhuacoModel:
         self.configuration    = None
         self.input_queue_dict = input_queue_dict
         self.output_queue     = output_queue
-        self.abstract_model    = None
+        self.abstract_model   = None
+        self.data_helper      = None
 
     def build_model(self,type="syscall"):
        # Load configuration
@@ -144,33 +145,18 @@ class ArhuacoModel:
 
     def initialize_model(self, type=None):
         # Create objects
-        if K.backend() == "tensorflow":
-            with tf.Session(graph = tf.Graph()) as sess:
-                self.abstract_model, configuration = self.build_model(type=type)
-                # First create the sources of data
-                data_helpers = DataHelpers(data_source=configuration['paths'],
-                                   label=None,
-                                   tokens_per_line=configuration['tokens_per_line'],
-                                   number_lines=configuration['number_lines'],
-                                   samples_per_batch=configuration['samples_per_batch'],
-                                   seed=configuration['seed'])
-                # Get the data sources
-                online_generator = data_helpers.get_data_stream(configuration['vocabulary'],
-                                                        configuration['input_queue'])
-                logging.info("Convolutional intrusion detection: %s" % type)
-        else:
-            self.abstract_model, configuration = self.build_model(type=type)
-            # First create the sources of data
-            data_helpers = DataHelpers(data_source=configuration['paths'],
-                                   label=None,
-                                   tokens_per_line=configuration['tokens_per_line'],
-                                   number_lines=configuration['number_lines'],
-                                   samples_per_batch=configuration['samples_per_batch'],
-                                   seed=configuration['seed'])
-            # Get the data sources
-            online_generator = data_helpers.get_data_stream(configuration['vocabulary'],
-                                                        configuration['input_queue'])
-            logging.info("Convolutional intrusion detection: %s" % type)
+        self.abstract_model, self.configuration = self.build_model(type=type)
+        # First create the sources of data
+        self.data_helper = DataHelpers(data_source=self.configuration['paths'],
+                           label=None,
+                           tokens_per_line=self.configuration['tokens_per_line'],
+                           number_lines=self.configuration['number_lines'],
+                           samples_per_batch=self.configuration['samples_per_batch'],
+                           seed=self.configuration['seed'])
+        logging.info("Convolutional intrusion detection: %s" % type)
 
     def predict(self, data):
-        return self.abstract_model.model.predict(data)
+        input = self.data_helper.string_to_input(self.configuration["vocabulary"],
+                                                 data)
+        logging.info(input)
+        return self.abstract_model.model.predict(input)

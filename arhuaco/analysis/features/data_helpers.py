@@ -249,3 +249,20 @@ class DataHelpers:
             processed_data = self.preprocess_input(input_data, in_train=False)
             x, y = self.build_input_data(processed_data, None, vocabulary)
             yield original_input, id, x
+
+    # Transforms the string input in to a suitable vector for
+    # neural network processing.
+    def string_to_input(self, vocabulary, data):
+        input_data = []
+        next_input = data
+        original_input = next_input
+        logging.info(data)
+        for line in next_input.splitlines():
+            # Eliminate bad characters
+            input_line = self.prep_data.clean_str(line)
+            input_data.append(input_line)
+        processed_data = self.preprocess_input(input_data, in_train=False)
+        logging.info(processed_data)
+        x, y = self.build_input_data(processed_data, None, vocabulary)
+        # return original_input, id, x
+        return x
