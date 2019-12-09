@@ -39,7 +39,8 @@ class ArhuacoModel:
             # Load configuration
             config_object.load_configuration("host")
             configuration = config_object.default_config
-            configuration['input_queue'] = self.input_queue_dict["syscall_sensor"]
+            if self.input_queue_dict is not None:
+                configuration['input_queue'] = self.input_queue_dict["syscall_sensor"]
 
             # Training parameters
             configuration['verbose'] = 2
@@ -55,7 +56,8 @@ class ArhuacoModel:
             config_object = Configuration()
             config_object.load_configuration("network")
             configuration = config_object.default_config
-            configuration['input_queue'] = self.input_queue_dict["network_sensor"]
+            if self.input_queue_dict is not None:
+                configuration['input_queue'] = self.input_queue_dict["network_sensor"]
 
             # Training parameters
             configuration['verbose'] = 2
