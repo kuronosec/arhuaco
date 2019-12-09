@@ -11,6 +11,7 @@ import socket
 from flask import Flask
 from flask import request,jsonify
 from arhuaco.analysis.arhuaco_model import ArhuacoModel
+from arhuaco.response.arhuaco_response import ArhuacoResponse
 
 from threading import Thread, Event
 from queue import Queue, Empty
@@ -20,6 +21,7 @@ from keras import backend as K
 
 # Global model object for Flask
 rest_model = None
+arhuaco_response = None
 
 # This is the main class for data analysis in Arhuaco
 
@@ -46,8 +48,10 @@ class ArhuacoAnalysis:
             if K.backend() == "tensorflow":
                 with tf.Session(graph = tf.Graph()) as sess:
                     global rest_model
+                    global arhuaco_response
                     rest_model = ArhuacoModel(self.input_queue_dict,
                                               self.output_queue)
+                    arhuaco_response = ArhuacoResponse(None)
                     rest_model.initialize_model("network")
                     self.start_rest_service()
         else:
@@ -73,9 +77,12 @@ def predict():
     dst_ip = request.args.get('dst')
     # dst_port = request.args.get('dstport')
     global rest_model
+    global arhuaco_response
     result = rest_model.predict(src_ip+" "+dst_ip)
-    logging.info(result)
+    response = arhuaco_response.\
+               process_result(result)
+    logging.info(response)
     logging.info(src_ip+" "+dst_ip)
     r = {}
-    r['is_malicious'] = "malicious"
+    r['is_malicious'] = response
     return jsonify(r)

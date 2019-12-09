@@ -31,14 +31,23 @@ class ArhuacoResponse:
     def process_result(self):
         while True:
             result = self.output_queue.get()
-            self.process_result_analysis(result)
+            self.process_result_stream(result)
             self.output_queue.task_done()
 
-    def process_result_analysis(self, result):
+    def process_result_stream(self, result):
         send_message = Message()
         stop_process = Process()
         if result["value"][0] > 0.95:
            print("Intrusion detected!!!: result %s" % result)
-           send_message.execute_action("Attacking sequence found in container %s, the following is the sequence: %s"
-                                        % (result["id"],result["original"]))
+           send_message.execute_action("Attacking sequence found"
+                                       " in container %s, "
+                                       "the following is the sequence: %s"
+                                % (result["id"],result["original"]))
            stop_process.execute_action(result["id"])
+           return "malicious"
+        return normal
+
+    def process_result(self, result):
+        if result > 0.95:
+           return "malicious"
+        return "normal"
