@@ -13,6 +13,8 @@ import tensorflow as tf
 from keras import backend as K
 
 # Model objects for Flask
+graph = None
+session = None
 arhuaco_analysis = None
 arhuaco_response = None
 app = Flask(__name__)
@@ -25,9 +27,14 @@ def predict():
     # dst_port = request.args.get('dstport')
     global arhuaco_analysis
     global arhuaco_response
-    result = arhuaco_analysis.model.predict(src_ip+" "+dst_ip)
-    response = arhuaco_response.\
-               process_result(result)
+    global graph
+    global session
+    response = None
+    with graph.as_default():
+        K.set_session(session)
+        result = arhuaco_analysis.model.predict(src_ip+" "+dst_ip)
+        response = arhuaco_response.\
+                   process_result(result)
     logging.info(response)
     logging.info(src_ip+" "+dst_ip)
     r = {}
@@ -37,9 +44,13 @@ def predict():
 def start_analysis():
     # Create objects
     if K.backend() == "tensorflow":
-        with tf.Session(graph = tf.Graph()) as sess:
+        global graph
+        graph = tf.Graph()
+        with tf.Session(graph = graph) as sess:
             global arhuaco_analysis
             global arhuaco_response
+            global session
+            session = sess
             arhuaco_analysis = ArhuacoAnalysis(None, None)
             arhuaco_analysis.create_analysis_model("network")
             arhuaco_response = ArhuacoResponse(None)

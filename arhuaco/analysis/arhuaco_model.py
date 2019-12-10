@@ -155,6 +155,7 @@ class ArhuacoModel:
                            number_lines=self.configuration['number_lines'],
                            samples_per_batch=self.configuration['samples_per_batch'],
                            seed=self.configuration['seed'])
+        self.abstract_model.model._make_predict_function()
         logging.info("Convolutional intrusion detection: %s" % type)
 
     def predict(self, data):

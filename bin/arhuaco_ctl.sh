@@ -7,7 +7,7 @@
 # Arhuaco only supports currently python 3.
 PYTHON_COMMAND="python3"
 # TODO: make this more generic for other versions of python 3.
-ARHUACO_LOCATION="/usr/local/lib/python3.5/dist-packages/arhuaco"
+ARHUACO_LOCATION="/usr/local/lib/python3.6/dist-packages/arhuaco"
 
 if [ "$1" == "start" ]
 then
@@ -21,6 +21,10 @@ then
                          2>> /var/log/arhuaco/arhuaco.log
     sudo killall tail
     sudo rm /var/lib/arhuaco/arhuaco-service.pid
+elif [ "$1" == "REST" ]
+then
+    echo "Starting Arhuaco WEB service..."
+    sudo $PYTHON_COMMAND "$ARHUACO_LOCATION"/service/arhuaco_web_service.py
 elif [ "$2" == "debug" ]
 then
    sudo $PYTHON_COMMAND "$ARHUACO_LOCATION"/test/main.py
