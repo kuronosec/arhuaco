@@ -32,7 +32,8 @@ def predict():
     response = None
     with graph.as_default():
         K.set_session(session)
-        result = arhuaco_analysis.model.predict(src_ip+" "+dst_ip)
+        result = arhuaco_analysis.model.predict(
+                              src_ip+" "+dst_ip)
         response = arhuaco_response.\
                    process_result(result)
     logging.info(response)

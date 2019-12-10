@@ -18,6 +18,7 @@ from arhuaco.config.configuration import Configuration
 from threading import Thread, Event
 from queue import Queue, Empty
 from keras import backend as K
+from keras.models import model_from_json
 
 import tensorflow as tf
 
@@ -32,11 +33,9 @@ class ArhuacoModel:
         self.abstract_model   = None
         self.data_helper      = None
 
-    def build_model(self,type="syscall"):
-       # Load configuration
+    def load_configuration(self, type="syscall"):
         config_object = Configuration()
         if type == "syscall":
-            # Load configuration
             config_object.load_configuration("host")
             configuration = config_object.default_config
             if self.input_queue_dict is not None:
@@ -49,10 +48,9 @@ class ArhuacoModel:
             configuration['num_epochs'] = 10
             configuration['val_split'] = 0.1
 
-            configuration['weights_file_conv'] = "/var/lib/arhuaco/data/models/sys_W_conv.bin"
-            configuration['model_file_conv'] = "/var/lib/arhuaco/data/models/sys_model_conv.json"
+            configuration['weights_file'] = "/var/lib/arhuaco/data/models/sys_W_conv.bin"
+            configuration['model_file'] = "/var/lib/arhuaco/data/models/sys_model_conv.json"
         elif type == "network":
-            # Load configuration
             config_object = Configuration()
             config_object.load_configuration("network")
             configuration = config_object.default_config
@@ -66,52 +64,64 @@ class ArhuacoModel:
             configuration['num_epochs'] = 10
             configuration['val_split'] = 0.1
 
-            configuration['weights_file_conv'] = "/var/lib/arhuaco/data/models/net_W_conv.bin"
-            configuration['model_file_conv'] = "/var/lib/arhuaco/data/models/net_model_conv.json"
+            configuration['weights_file'] = "/var/lib/arhuaco/data/models/net_W_conv.bin"
+            configuration['model_file'] = "/var/lib/arhuaco/data/models/net_model_conv.json"
+        self.configuration = configuration
 
+    def build_model(self):
+        # Create a new Convolutional network object
+        cnn_w2v = CnnW2v(seed=self.configuration['seed'],
+                  samples_per_batch=self.configuration['samples_per_batch'],
+                  min_word_count=self.configuration['min_word_count'],
+                  context=self.configuration['context'],
+                  weights_file=self.configuration['weights_file'],
+                  model_file=self.configuration['model_file'],
+                  labels=None,
+                  verbose=self.configuration['verbose'])
+        cnn_w2v.set_w2v_params(embedding_weights=embedding_weights,
+                               vocabulary=self.configuration['vocabulary'],
+                               vocabulary_index=self.configuration['vocabulary_index'])
+        # Buid the model
+        # Do I really need to build the model again?
+        # What is in the the model.json file then?
+        cnn_w2v.build_model(learn_rate=self.configuration['learn_rate'],
+                            momentum=self.configuration['momentum'],
+                            decay=self.configuration['decay'],
+                            nesterov=self.configuration['nesterov'],
+                            regularizer_param=self.configuration['regularizer_param'],
+                            hidden_neurons=self.configuration['hidden_dims'],
+                            num_filters=self.configuration['num_filters'],
+                            filter_sizes=self.configuration['filter_sizes'],
+                            dropout_rate=self.configuration['dropout_prob'],
+                            embedding_dim=self.configuration['embedding_dim'],
+                            pool_size=self.configuration['pool_size'],
+                            sequence_length=self.configuration['sequence_length']
+                           )
+        cnn_w2v.load_model_weights(self.configuration['weights_file'])
+        return cnn_w2v
+
+    def load_feature_extractor(self):
         w2v_model_name = "{:d}features_{:d}minwords_{:d}context".format(
-                      configuration['num_features'],
-                      configuration['min_word_count'],
-                      configuration['context'])
+                      self.configuration['num_features'],
+                      self.configuration['min_word_count'],
+                      self.configuration['context'])
 
-        # Create objects
         # Apply the word2vec processing
         w2v = W2V()
         params = w2v.load_word2vec_model(w2v_model_name)
         embedding_weights=params[0]
-        configuration['vocabulary']=params[1]
-        configuration['vocabulary_index']=params[2]
+        self.configuration['vocabulary']=params[1]
+        self.configuration['vocabulary_index']=params[2]
 
-        # Create the Convolutional network object
-        cnn_w2v = CnnW2v(seed=configuration['seed'],
-                  samples_per_batch=configuration['samples_per_batch'],
-                  min_word_count=configuration['min_word_count'],
-                  context=configuration['context'],
-                  weights_file=configuration['weights_file_conv'],
-                  model_file=configuration['model_file_conv'],
-                  labels=None,
-                  verbose=configuration['verbose'])
-        cnn_w2v.set_w2v_params(embedding_weights=embedding_weights,
-                               vocabulary=configuration['vocabulary'],
-                               vocabulary_index=configuration['vocabulary_index'])
-        # Buid the model
-        # Do I really need to build the model again?
-        # What is in the the model.json file then?
-        cnn_w2v.build_model(learn_rate=configuration['learn_rate'],
-                            momentum=configuration['momentum'],
-                            decay=configuration['decay'],
-                            nesterov=configuration['nesterov'],
-                            regularizer_param=configuration['regularizer_param'],
-                            hidden_neurons=configuration['hidden_dims'],
-                            num_filters=configuration['num_filters'],
-                            filter_sizes=configuration['filter_sizes'],
-                            dropout_rate=configuration['dropout_prob'],
-                            embedding_dim=configuration['embedding_dim'],
-                            pool_size=configuration['pool_size'],
-                            sequence_length=configuration['sequence_length']
-                           )
-        cnn_w2v.load_model_weights(configuration['weights_file_conv'])
-        return cnn_w2v, configuration
+    def load_model_from_file(self):
+        json_file = open(self.configuration['model_file'], 'r')
+        loaded_model_json = json_file.read()
+        json_file.close()
+        loaded_model = model_from_json(loaded_model_json)
+        # load weights into new model
+        loaded_model.load_weights(self.configuration['weights_file'])
+        logging.info("Loaded model from disk")
+        self.abstract_model = loaded_model
 
     def stream_analysis(self, type=None):
         # Create objects
@@ -147,7 +157,9 @@ class ArhuacoModel:
 
     def initialize_model(self, type=None):
         # Create objects
-        self.abstract_model, self.configuration = self.build_model(type=type)
+        self.load_configuration(type=type)
+        self.load_feature_extractor()
+        self.load_model_from_file()
         # First create the sources of data
         self.data_helper = DataHelpers(data_source=self.configuration['paths'],
                            label=None,
@@ -159,7 +171,7 @@ class ArhuacoModel:
         logging.info("Convolutional intrusion detection: %s" % type)
 
     def predict(self, data):
-        input = self.data_helper.string_to_input(self.configuration["vocabulary"],
-                                                 data)
+        input = self.data_helper.string_to_input(
+                     self.configuration["vocabulary"],data)
         logging.info(input)
         return self.abstract_model.model.predict(input)
