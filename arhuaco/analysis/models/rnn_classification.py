@@ -57,9 +57,9 @@ class RnnClassification(AbstractModel):
         # criterion = nn.BCELoss()
         self.optim = optim.SGD(model.parameters(), lr=ec.args.lr)
 
-    def load_data(self, train_data, train_data):
+    def load_data(self, train_data, val_data):
         self.train_loader = train_data
-        self.val_loader = train_data
+        self.val_loader = tval_data
 
     def train_model(self, args, model):
         model.train()

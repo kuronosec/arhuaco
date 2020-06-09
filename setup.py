@@ -10,11 +10,9 @@ sensors_packages = ['arhuaco.sensors',
 
 analysis_packages   = ['arhuaco.analysis',
                        'arhuaco.analysis.util',
-                       'arhuaco.analysis.convolutional',
+                       'arhuaco.analysis.models',
                        'arhuaco.analysis.optimization',
-                       'arhuaco.analysis.features',
-                       'arhuaco.analysis.generative',
-                       'arhuaco.analysis.svm']
+                       'arhuaco.analysis.features']
 
 response_packages   = ['arhuaco.response']
 
