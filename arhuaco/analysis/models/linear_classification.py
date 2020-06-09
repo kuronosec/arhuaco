@@ -22,10 +22,6 @@ class LinearClassification(AbstractModel):
 
     def __init__(self):
         super(LinearClassification, self).__init__()
-        # Create the classifier
-        self.model = LinearNetwork(in_features = 300, out_features = 2)
-        self.optim = optim.SGD(params = classifier.parameters(),
-                          lr = learning_rate)
 
     def load_data(self, train_loader, val_loader):
         self.train_loader = train_loader
