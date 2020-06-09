@@ -3,6 +3,11 @@ import torch.nn.functional as F
 
 from arhuaco.analysis.abstract_model import AbstractModel
 
+# Set some hyper parameters
+learning_rate = 0.001
+batch_size = 32
+epochs = 1
+
 class LinearNetwork(nn.Module):
 
     def __init__(self, in_features, out_features):
@@ -25,13 +30,13 @@ class LinearClassification(AbstractModel):
 
     def load_data(self, train_loader, val_loader):
         self.train_loader = train_loader
-        self.valloader = val_loader
+        self.val_loader = val_loader
 
     def train_model(self, model, optim):
         # Set train mode
         model.train()
         for epoch in range(epochs):
-            for iter, (vectors, targets) in enumerate(self.trainloader):
+            for iter, (vectors, targets) in enumerate(self.train_loader):
                 # Zero out previous gradients
                 optim.zero_grad()
 
@@ -47,7 +52,6 @@ class LinearClassification(AbstractModel):
 
                 # Compute the prediction accuracy
                 accuracy = (preds == targets).sum()
-                accuracy = accuracy.get().float_precision()
                 accuracy = 100 * (accuracy / batch_size)
 
                 # Backpropagate the loss
@@ -55,12 +59,14 @@ class LinearClassification(AbstractModel):
 
                 # Update weights
                 optim.step()
+                print(accuracy)
+                print(loss)
 
     def test_model(self, model):
         """ Perform validation on exactly one batch """
         # Set validation mode
         model.eval()
-        for vectors, targets in self.valloader:
+        for vectors, targets in self.val_loader:
             probs, logits = model(vectors)
 
             loss = ((probs -  targets)**2).sum()
@@ -69,8 +75,6 @@ class LinearClassification(AbstractModel):
             targets = targets.argmax(dim=1)
 
             accuracy = preds.eq(targets).sum()
-            accuracy = accuracy.get().float_precision()
             accuracy = 100 * (accuracy / batch_size)
-
-            loss = loss.get().float_precision()
+            print(accuracy)
             print(loss)
