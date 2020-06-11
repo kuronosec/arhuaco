@@ -6,7 +6,7 @@ from arhuaco.analysis.abstract_model import AbstractModel
 # Set some hyper parameters
 learning_rate = 0.001
 batch_size = 32
-epochs = 1
+epochs = 5
 
 class LinearNetwork(nn.Module):
 
@@ -52,15 +52,14 @@ class LinearClassification(AbstractModel):
 
                 # Compute the prediction accuracy
                 accuracy = (preds == targets).sum()
-                accuracy = 100 * (accuracy / batch_size)
-
+                accuracy = 100 * (float(accuracy) / batch_size)
+                print("Accuracy:")
+                print(accuracy)
                 # Backpropagate the loss
                 loss.backward()
 
                 # Update weights
                 optim.step()
-                print(accuracy)
-                print(loss)
 
     def test_model(self, model):
         """ Perform validation on exactly one batch """
@@ -75,6 +74,6 @@ class LinearClassification(AbstractModel):
             targets = targets.argmax(dim=1)
 
             accuracy = preds.eq(targets).sum()
-            accuracy = 100 * (accuracy / batch_size)
+            accuracy = 100 * (float(accuracy) / batch_size)
+            print("Accuracy:")
             print(accuracy)
-            print(loss)
