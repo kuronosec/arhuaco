@@ -52,3 +52,7 @@ the Linux kernel.
 *  A. Gomez Ramirez, C. Lara, U. Kebschull for the ALICE Collaboration. Intrusion Prevention and Detection in Grid computing - The ALICE Case, Journal of Physics: Conference Series (JPCS). http://iopscience.iop.org/article/10.1088/1742-6596/664/6/062017.
 *  A. Gomez Ramirez, M. Martinez Pedreira, C. Grigoras, L. Betev, C. Lara and U. Kebschull for the ALICE Collaboration. A Security Monitoring Framework For Virtualization Based HEP Infrastructures. Journal of Physics: Conference Series, 898(10):102004, 2017. https://arxiv.org/abs/1704.04782.
 *  A. Gomez Ramirez, C. Lara, L. Betev, D. Bilanovic, U. Kebschull for the ALICE Collaboration. Arhuaco: Deep Learning and Isolation Based Security for Distributed High-Throughput Computing. https://arxiv.org/abs/1801.04179.
+
+# In the media
+
+https://www.scientificamerican.com/article/worlds-most-powerful-particle-collider-taps-ai-to-expose-hack-attacks/
