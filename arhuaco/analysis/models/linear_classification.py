@@ -81,12 +81,12 @@ class LinearClassification(AbstractModel):
     def run_inference(self, client):
         """ Perform validation on exactly one batch """
         for vectors, targets in self.val_loader:
-            (probs, logits) = client.run_remote_inference("linear",
+            predict = client.run_remote_inference("linear",
                                      vectors, mpc=True)
-            print("Inference's result: ", result)
-            loss = ((probs -  targets)**2).sum()
 
-            preds = probs.argmax(dim=1)
+            loss = ((predict -  targets)**2).sum()
+
+            preds = predict.argmax(dim=1)
             targets = targets.argmax(dim=1)
 
             accuracy = preds.eq(targets).sum()
