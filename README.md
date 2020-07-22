@@ -55,4 +55,4 @@ the Linux kernel.
 
 # In the media
 
-https://www.scientificamerican.com/article/worlds-most-powerful-particle-collider-taps-ai-to-expose-hack-attacks/
+*  https://www.scientificamerican.com/article/worlds-most-powerful-particle-collider-taps-ai-to-expose-hack-attacks/
